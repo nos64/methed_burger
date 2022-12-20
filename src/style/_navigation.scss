@@ -7,10 +7,10 @@
   min-width: 100vw;
 }
 
-.navigateion__list {
+.navigation__list {
   display: flex;
   column-gap: 8px; 
-  padding: 0 calc((100vw / 2) - ($container / 2) );
+  padding: 0 calc((100vw / 2) - ($container / 2));
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -82,6 +82,13 @@
   background-image: url("./img/sauce.png");
 }
 
+@media (min-width: 480px) {
+  $container: 640px;
+  .navigation__list {
+    padding: 0 calc((100vw / 2) - ($container / 2));
+  }
+}
+
 @media (min-width: 768px) {
   .navigateion__list {
     column-gap: 12px;
@@ -89,6 +96,10 @@
 }
 
 @media (min-width: 1024px) {
+  $container: 960px;
+  .navigation__list {
+    padding: 0 calc((100vw / 2) - ($container / 2));
+  }
   .navigation {
     margin-bottom: 50px;
   }
@@ -102,6 +113,13 @@
     font-size: 16px;
     line-height: 22px;
     background-position: 14px center;
+  }
+}
+
+@media (min-width: 1360px) {
+  $container: 1290px;
+  .navigation__list {
+    padding: 0 calc((100vw / 2) - ($container / 2));
   }
 }
 
