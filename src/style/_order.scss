@@ -47,8 +47,8 @@
 
 .order__title {
   font-weight: 600;
-font-size: 16px;
-line-height: 100%;
+  font-size: 16px;
+  line-height: 100%;
 }
 
 .order__count {
@@ -68,11 +68,50 @@ line-height: 100%;
 }
 
 .order__wrap_list {
-
+  display: none;
 }
 
 .order__list {
   margin-bottom: 13px;
+}
+
+.order__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid $light-background;
+}
+
+.order__item:first-child {
+  border-top: 1px solid $light-background;
+}
+
+.order__image {
+  width: 64px;
+  height: 52px;
+  border-radius: 8px;
+}
+
+.order__product {
+  flex-grow: 1;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.order__product-title {
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.order__product-weight {
+  color: $light-text;
+  margin-bottom: 6px;
+}
+
+.order__product-price {
+
 }
 
 .order__total {
@@ -118,4 +157,80 @@ line-height: 100%;
   font-size: 10px;
   line-height: 14px;
   color: $light-text;
+}
+
+.order__empty {
+
+}
+
+@media (min-width: 768px) {
+  .order {
+    width: 145px;
+    transition: width 0.06s ease-in-out;
+  }
+
+  .order.order_open {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .order {
+    width: 300px;
+  }
+  .order__wrapper {
+    position: unset;
+    padding: 24px 16px;
+  }
+
+  .order__wrap-title {
+    margin-bottom: 8px;
+  }
+
+  .order__title {
+    font-size: 24px;
+  }
+
+  .order__count {
+    font-size: 12px;
+    width: 41px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .order__item {
+    padding: 15px 0;
+  }
+  
+  .order__total {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .order__submit {
+    padding: 11px;
+    border-radius: 12px;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .order__apeal {
+    font-size: 12px;
+  }
+  
+  .order__close {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: $light-text;
+  }
+
+  .order__close {
+    display: none;
+  }
+
+  .order__wrap_list {
+    display: block;
+    margin-bottom: 16px;
+  }
 }
