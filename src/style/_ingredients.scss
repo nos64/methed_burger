@@ -1,0 +1,30 @@
+
+.ingredients__title {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 130%
+}
+
+.ingredients__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 130%;
+}
+
+.ingredients__calories {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 130%;
+  color: $light-text;
+}
+
+@media (min-width: 1024px) {
+  .ingredients__title,
+  .ingredients__list,
+  .ingredients__calories {
+    font-size: 12px;
+  }
+}
