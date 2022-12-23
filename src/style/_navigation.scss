@@ -90,7 +90,7 @@
 }
 
 @media (min-width: 768px) {
-  .navigateion__list {
+  .navigation__list {
     column-gap: 12px;
   }
 }
@@ -99,13 +99,10 @@
   $container: 960px;
   .navigation__list {
     padding: 0 calc((100vw / 2) - ($container / 2));
+    column-gap: 24px;
   }
   .navigation {
     margin-bottom: 50px;
-  }
-
-  .navigateion__list {
-    column-gap: 24px;
   }
 
   .navigation__button {

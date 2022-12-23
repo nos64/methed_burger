@@ -1,7 +1,7 @@
-@import './var';
+@import './colors';
 
-$container: 300px;
-$padding-container: 10px;
+  $container: 300px;
+  $padding-container: 10px;
 
 html {
   box-sizing: border-box;
@@ -21,6 +21,8 @@ body {
   min-height: 100vh;
   background-color: $background-color;
   color: $text-color;
+  position: relative;
+  overflow-x: hidden;
 }
 
 img, 
