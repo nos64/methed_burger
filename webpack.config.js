@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const mode = process.env.NODE_END || 'development';
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const devMode = mode === 'development';
 
@@ -30,7 +31,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
-    })
+    }),
+    new SpriteLoaderPlugin()
   ],
   module: {
     rules: [
@@ -64,7 +66,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(jpe?g|png|webp|gif|svg)$/i,
+        test: /\.(jpe?g|png|webp|gif)$/i,
         use: [
           {
             loader: 'image-webpack-loader',
@@ -90,6 +92,18 @@ module.exports = {
         ],
         type: 'asset/resource',
       },
+      {
+        test: /\.svg$/i,
+        include: /.*_sprite\.svg/,
+        use: [
+            {
+                loader: 'svg-sprite-loader',
+                options: {
+                    publicPath: '',
+                }
+            },
+        ],
+    },
       {
         test: /\.m?js$/i,
         exclude: /(node_modules|bower_components)/,
