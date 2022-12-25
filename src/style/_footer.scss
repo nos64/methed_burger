@@ -4,7 +4,6 @@
   background-color: $light-color;
 }
 
-
 .footer__logo {
   width: 196px;
   color: $button-color;
@@ -33,6 +32,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 130%;
+  transition: color 0.3s ease-in-out;
 }
 
 .footer__link-pic {
@@ -47,6 +47,7 @@
 
 .footer__link-icon {
   width: 36px;
+  transition: color 0.3s ease-in-out;
 }
 
 .footer__development {
@@ -56,6 +57,19 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+}
+
+.footer__development-link {
+  transition: color 0.3s ease-in-out;
+}
+
+.footer__link-phone:hover,
+.footer__link-phone:focus,
+.footer__link-icon:hover,
+.footer__link-icon:focus,
+.footer__development-link:hover,
+.footer__development-link:focus {
+  color: $contrast-background;
 }
 
 @media (min-width: 480px) {

@@ -134,6 +134,24 @@
   line-height: 100%;
   color: $light-color;
   margin-bottom: 8px;
+  transition: transform 0.2s ease, background-color 0.3s ease-in-out;
+}
+
+.order__submit:hover {
+  background-color: $contrast-background;
+}
+
+.order__submit:focus-visible {
+  background-color: $hover-color;
+}
+
+.order__submit:active {
+  transform: translate(1px, 1px);
+}
+
+.order__submit:disabled {
+  background-color: $background-color;
+  color: $disabled-color;
 }
 
 .order__wrap-apeal {
@@ -187,6 +205,11 @@
     margin-bottom: 8px;
   }
 
+  .order__wrap-title::after {
+    content: none;
+    pointer-events: none;
+  }
+
   .order__title {
     font-size: 24px;
   }
@@ -217,6 +240,7 @@
   .order__apeal {
     font-size: 12px;
   }
+
   
   .order__close {
     font-weight: 400;
