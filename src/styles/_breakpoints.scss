@@ -1,0 +1,33 @@
+$container: var(--container);
+$padding-container: var(--padding-container);
+
+:root {
+  --container: 300px;
+  --padding-container: 10px;
+}
+
+@media (min-width: 480px) {
+  :root {
+    --container: 640px;
+  }
+
+}
+
+@media (min-width: 768px) {
+  :root {
+    --padding-container: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container: 960px;
+    --padding-container: 32px;
+  }
+}
+
+@media (min-width: 1360px) {
+  :root {
+    --container: 1290px;
+  }
+}

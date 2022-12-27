@@ -1,44 +1,7 @@
-@import '../../styles/variables';
+@import '../../styles/breakpoints';
 
 .container {
   max-width: calc($container + $padding-container * 2);
   padding: 0 $padding-container;
   margin: 0 auto;
-}
-
-@media (min-width: 480px) {
-  $container: 640px;
-  .container {
-    max-width: calc($container + $padding-container * 2);
-    padding: 0 $padding-container;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 768px) {
-  $padding-container: 64px;
-  // .container {
-  //   max-width: calc($container + $padding-container * 2);
-  //   padding: 0 $padding-container;
-  //   margin: 0 auto;
-  // }
-}
-
-@media (min-width: 1024px) {
-  $container: 960px;
-  $padding-container: 32px;
-  .container {
-    max-width: calc($container + $padding-container * 2);
-    padding: 0 $padding-container;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1360px) {
-  $container: 1290px;
-  .container {
-    max-width: calc($container + $padding-container * 2);
-    padding: 0 $padding-container;
-    margin: 0 auto;
-  }
 }
