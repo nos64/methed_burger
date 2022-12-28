@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Order.module.scss';
 import hotDog1 from '../../../assets/images/hot-dog_1.jpg';
 // класс для октрывания корзины order_open
 
 const Order = () => {
+  const [isOrderOpen, setIsOrderOpen] = useState(false);
+
+  const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
   return (
-    <div className="catalog__order order">
-      <section className="order__wrapper">
-        <div className="order__wrap-title">
-          <h2 className="order__title">Корзина</h2>
-          <span className="order__count">4</span>
+    <div
+      className={
+        isOrderOpen
+          ? `${styles.catalog__order} ${styles.order} ${styles.order_open}`
+          : `${styles.catalog__order} ${styles.order}`
+      }
+      onClick={handleOrderClick}
+    >
+      <section className={styles.order__wrapper}>
+        <div className={styles.order__wrapTitle}>
+          <h2 className={styles.order__title}>Корзина</h2>
+          <span className={styles.order__count}>4</span>
         </div>
 
-        <div className="order__wrap_list">
-          <ul className="order__list">
+        <div className={styles.order__wrap_list}>
+          <ul className={styles.order__list}>
             <li className={styles.order__item}>
               <img className={styles.order__image} src={hotDog1} alt="Жгучий хот-дог" />
 
