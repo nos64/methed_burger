@@ -1,7 +1,12 @@
 import React from 'react';
+import NavPanel from '../../components/NavPanel';
 
 const MainPage = () => {
-  return <div>Main</div>;
+  return (
+    <>
+      <NavPanel />
+    </>
+  );
 };
 
 export default MainPage;
