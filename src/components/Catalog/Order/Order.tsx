@@ -20,7 +20,7 @@ const Order = () => {
           <span className={styles.order__count}>4</span>
         </div>
 
-        <div className={styles.order__wrap_list}>
+        <div className={styles.order__wrap_list} onClick={(e) => e.stopPropagation()}>
           <ul className={styles.order__list}>
             <OrderItem />
           </ul>
