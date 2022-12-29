@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Order.module.scss';
-import hotDog1 from '../../../assets/images/hot-dog_1.jpg';
-// класс для октрывания корзины order_open
+import OrderItem from './OrderItem';
 
 const Order = () => {
   const [isOrderOpen, setIsOrderOpen] = useState(false);
-
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
   return (
     <div
@@ -24,62 +22,7 @@ const Order = () => {
 
         <div className={styles.order__wrap_list}>
           <ul className={styles.order__list}>
-            <li className={styles.order__item}>
-              <img className={styles.order__image} src={hotDog1} alt="Жгучий хот-дог" />
-
-              <div className={styles.order__product}>
-                <h3 className={styles.order__productTitle}>Жгучий хот-дог</h3>
-                <p className={styles.order__productWeight}>245г</p>
-                <p className={styles.order__productPrice}>
-                  239
-                  <span className={styles.currency}>₽</span>
-                </p>
-              </div>
-
-              <div className={`${styles.order__productCount} ${styles.count}`}>
-                <button className={styles.count__minus}>-</button>
-                <p className={styles.count__amount}>1</p>
-                <button className={styles.count__plus}>+</button>
-              </div>
-            </li>
-
-            <li className={styles.order__item}>
-              <img className={styles.order__image} src={hotDog1} alt="Жгучий хот-дог" />
-
-              <div className={styles.order__product}>
-                <h3 className={styles.order__productTitle}>Жгучий хот-дог</h3>
-                <p className={styles.order__productWeight}>245г</p>
-                <p className={styles.order__productPrice}>
-                  239
-                  <span className={styles.currency}>₽</span>
-                </p>
-              </div>
-
-              <div className={`${styles.order__productCount} ${styles.count}`}>
-                <button className={styles.count__minus}>-</button>
-                <p className={styles.count__amount}>1</p>
-                <button className={styles.count__plus}>+</button>
-              </div>
-            </li>
-
-            <li className={styles.order__item}>
-              <img className={styles.order__image} src={hotDog1} alt="Жгучий хот-дог" />
-
-              <div className={styles.order__product}>
-                <h3 className={styles.order__productTitle}>Жгучий хот-дог</h3>
-                <p className={styles.order__productWeight}>245г</p>
-                <p className={styles.order__productPrice}>
-                  239
-                  <span className={styles.currency}>₽</span>
-                </p>
-              </div>
-
-              <div className={`${styles.order__productCount} ${styles.count}`}>
-                <button className={styles.count__minus}>-</button>
-                <p className={styles.count__amount}>1</p>
-                <button className={styles.count__plus}>+</button>
-              </div>
-            </li>
+            <OrderItem />
           </ul>
 
           <div className={styles.order__total}>
