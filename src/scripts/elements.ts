@@ -12,3 +12,11 @@ export const navigationList: HTMLUListElement | null = document.querySelector('.
 export const navigationListItems: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll('.navigation__button');
 
 export const catalogTitle: HTMLElement | null = document.querySelector('.catalog__title');
+
+export const modalProductBtn: HTMLButtonElement | null = document.querySelector('.modal-product__btn');
+
+export const countAmount: HTMLParagraphElement | null = document.querySelector('.modal-product .count__amount');
+
+export const orderCount: HTMLSpanElement | null = document.querySelector('.order__count');
+export const orderList: HTMLUListElement | null = document.querySelector('.order__list');
+export const orderTotalAmount: HTMLSpanElement | null = document.querySelector('.order__total-amount');

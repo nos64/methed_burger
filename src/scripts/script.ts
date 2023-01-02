@@ -1,10 +1,10 @@
+import { cartInint } from './cart';
 import { 
   modalProduct,
   catalogList,
 } from './elements';
 import { navigationListContoller } from './navigationListController';
 import { openModal } from './openModal';
-// import { openModal } from './openModal';
 import { renderListProduct } from './renderListProduct';
 
 const closeModal = (e: KeyboardEvent) => {
@@ -39,6 +39,7 @@ modalProduct?.addEventListener('click', (e: MouseEvent) => {
 const init = () => {
   renderListProduct();
   navigationListContoller(renderListProduct);
+  cartInint();
 }
 
 init();

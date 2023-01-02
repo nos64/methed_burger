@@ -7,7 +7,8 @@ import {
   ingredientsList,
   ingredientsCalories,
   modalProductPriceCount,
-  modalProduct
+  modalProduct,
+  modalProductBtn
 } from "./elements";
 import { getData } from "./getData";
 
@@ -42,6 +43,9 @@ export const openModal = async (id: string) => {
 
   if (modalProductPriceCount && modalProductPriceCount instanceof HTMLSpanElement) {
     modalProductPriceCount.textContent = product.price.toString();
+  }
+  if (modalProductBtn) {
+    modalProductBtn.dataset.idProduct = product.id;
   }
 
   modalProduct?.classList.add('modal_open');
