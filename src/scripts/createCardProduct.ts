@@ -2,39 +2,40 @@ import { IProduct } from "../types/IProduct";
 import { API_URL } from "./constants";
 
 export const createCardProduct = (product: IProduct) => {
-  const li = document.createElement('li');
+  const li: HTMLLIElement = document.createElement('li');
   li.className = 'ingredients__item';
 
-  const article = document.createElement('article');
+  const article: HTMLElement = document.createElement('article');
   article.className = 'product';
+  article.dataset.idProduct = product.id;
 
-  const img = document.createElement('img');
+  const img: HTMLImageElement = document.createElement('img');
   img.className = 'product__image';
   img.src = `${API_URL}/${product.image}`;
   img.alt = product.title;
 
-  const price = document.createElement('p');
+  const price: HTMLParagraphElement = document.createElement('p');
   price.className = 'product__price';
-  const priceCount = document.createElement('span');
+  const priceCount: HTMLSpanElement = document.createElement('span');
   priceCount.className = 'product__price-count';
   priceCount.textContent = product.price.toString();
-  const currency = document.createElement('span');
+  const currency: HTMLSpanElement = document.createElement('span');
   currency.className = 'currency';
   currency.textContent = '₽';
   price.append(priceCount, currency);
 
-  const h3 = document.createElement('h3');
+  const h3: HTMLHeadingElement = document.createElement('h3');
   h3.className = 'ptoduct__title';
   const titleButton = document.createElement('button');
   titleButton.className = 'product__detail';
   titleButton.textContent = product.title;
   h3.append(titleButton);
 
-  const weight = document.createElement('p');
+  const weight: HTMLParagraphElement = document.createElement('p');
   weight.className = 'product__weight';
   weight.textContent = `${product.weight}г`;
 
-  const addButton = document.createElement('button');
+  const addButton: HTMLButtonElement = document.createElement('button');
   addButton.className = 'product__add';
   addButton.textContent = 'Добавить';
 

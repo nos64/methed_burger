@@ -9,6 +9,6 @@ export const ingredientsCalories: HTMLParagraphElement | null = document.querySe
 export const modalProductPriceCount: HTMLSpanElement | null = document.querySelector('.modal-product__price-count');
 
 export const navigationList: HTMLUListElement | null = document.querySelector('.navigation__list');
-export const navigationListItems: NodeListOf<Element> | null = document.querySelectorAll('.navigation__button');
+export const navigationListItems: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll('.navigation__button');
 
 export const catalogTitle: HTMLElement | null = document.querySelector('.catalog__title');

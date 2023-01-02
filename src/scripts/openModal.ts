@@ -1,4 +1,5 @@
 import { IProduct } from "../types/IProduct";
+import { API_URL, PREFIX_PRODUCT } from "./constants";
 import { 
   modalProducTitle,
   modalProductImage,
@@ -8,22 +9,23 @@ import {
   modalProductPriceCount,
   modalProduct
 } from "./elements";
+import { getData } from "./getData";
 
-export const openModal = (product: IProduct) => {
-
+export const openModal = async (id: string) => {
+  const product: IProduct = await getData(`${API_URL}${PREFIX_PRODUCT}/${id}`)
   if (modalProducTitle && modalProducTitle instanceof HTMLElement) {
     modalProducTitle.textContent = product.title;
   }
 
   if (modalProductImage && modalProductImage instanceof HTMLImageElement) {
-    modalProductImage.src = product.image;
+    modalProductImage.src = `${API_URL}/${product.image}`;
   }
 
   if (modalProductDescription && modalProductDescription instanceof HTMLParagraphElement) {
     modalProductDescription.textContent = product.description;
   }
 
-  const ingredientsListItems: HTMLLIElement[] = product.ingredients.map((item) => {
+  const ingredientsListItems: HTMLLIElement[] = product.ingredients.map((item: string) => {
     const li = document.createElement('li');
     li.className = 'ingredients__item';
     li.textContent = item;

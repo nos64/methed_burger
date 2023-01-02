@@ -3,15 +3,27 @@ import {
   catalogList,
 } from './elements';
 import { navigationListContoller } from './navigationListController';
+import { openModal } from './openModal';
 // import { openModal } from './openModal';
-import { renderListProduct } from './renderListData';
+import { renderListProduct } from './renderListProduct';
 
+const closeModal = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    modalProduct?.classList.remove('modal_open');
+    document.removeEventListener('keydown', closeModal);
+  }
+}
+
+document.addEventListener('keydown', closeModal);
 
 catalogList?.addEventListener('click', (e: MouseEvent) => {
   const { target } = e;
   if (target && target instanceof HTMLButtonElement && target.closest('.product__detail')
     || target instanceof HTMLImageElement && target.closest('.product__image')) {
-      // openModal(BurgerMax);
+      const id: string | undefined = target.closest<HTMLElement>('.product')?.dataset.idProduct;
+      if (id) {
+        openModal(id);
+      }
   }
 })
 
@@ -26,7 +38,7 @@ modalProduct?.addEventListener('click', (e: MouseEvent) => {
 
 const init = () => {
   renderListProduct();
-  navigationListContoller();
+  navigationListContoller(renderListProduct);
 }
 
 init();
