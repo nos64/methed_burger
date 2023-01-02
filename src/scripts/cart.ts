@@ -15,7 +15,9 @@ const getCart = () => {
 const renderCartList = async () => {
   const cartList: ICartItem[] = getCart();
   const allIdProduct = cartList.map((item: ICartItem) => item.id)
-  const data = await getData(`${API_URL}${PREFIX_PRODUCT}/?list=${allIdProduct}`)
+  const data = cartList.length
+  ? await getData(`${API_URL}${PREFIX_PRODUCT}/?list=${allIdProduct}`)
+  : [];
   
   const countProduct: number = cartList.reduce((acc: number, item: ICartItem) => acc + item.count, 0)
   if (orderCount) {
@@ -51,9 +53,9 @@ const renderCartList = async () => {
     orderList.textContent = '';
     orderList.append(...cartItems);
   }
-  // if (orderTotalAmount) {
+  if (orderTotalAmount) {
   //   orderTotalAmount.textContent = cartItems.reduce((acc: number, item: IProduct) => acc + item.price, 0);
-  // }
+  }
 }
 
 const updateCartList = (cartList: ICartItem[]) => {
