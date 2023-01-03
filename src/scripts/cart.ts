@@ -14,6 +14,7 @@ const getCart = () => {
 
 const renderCartList = async () => {
   const cartList: ICartItem[] = getCart();
+  console.log('cartList: ', cartList);
   const allIdProduct = cartList.map((item: ICartItem) => item.id)
   const data = cartList.length
   ? await getData(`${API_URL}${PREFIX_PRODUCT}/?list=${allIdProduct}`)
@@ -41,9 +42,9 @@ const renderCartList = async () => {
       </div>
 
       <div class="order__product-count count">
-        <button class="count__minus">-</button>
+        <button class="count__minus" data-id-product=${product.id}>-</button>
         <p class="count__amount">${product.count}</p>
-        <button class="count__plus">+</button>
+        <button class="count__plus" data-id-product=${product.id}>+</button>
       </div>
     `
     } 
@@ -54,7 +55,14 @@ const renderCartList = async () => {
     orderList.append(...cartItems);
   }
   if (orderTotalAmount) {
-  //   orderTotalAmount.textContent = cartItems.reduce((acc: number, item: IProduct) => acc + item.price, 0);
+    orderTotalAmount.textContent = data.reduce((acc: number, item: IProduct) => {
+      const product = cartList.find((cartItem: ICartItem) => cartItem.id === item.id);
+      if (product) {
+        
+        return acc + (item.price * product.count);
+      }
+      return 0
+    }, 0).toString();
   }
 }
 
@@ -63,9 +71,9 @@ const updateCartList = (cartList: ICartItem[]) => {
   renderCartList();
 }
 
-type addCartFunction = (id: string | undefined, count?: number) => void;
+type changeCountCartFunction = (id: string | undefined, count?: number) => void;
 
-const addCart: addCartFunction = (id, count = 1) => {
+const addCart: changeCountCartFunction = (id, count = 1) => {
   const cartList: ICartItem[] = getCart();
   const product = cartList.find((item) => item.id === id);
 
@@ -77,9 +85,16 @@ const addCart: addCartFunction = (id, count = 1) => {
   updateCartList(cartList);
 }
 
-// const removeCart = (id) => {
+const removeCart = (id: string | undefined) => {
+  const cartList: ICartItem[] = getCart();
+  const productIndex = cartList.findIndex((item) => item.id === id);
+  cartList[productIndex].count -= 1;
 
-// }
+  if (cartList[productIndex].count < 1) {
+    cartList.splice(productIndex, 1)
+  }
+  updateCartList(cartList);
+}
 
 const cartController = () => {
   catalogList?.addEventListener('click', ({target}) => {
@@ -96,6 +111,18 @@ const cartController = () => {
     })
   }
 
+  orderList?.addEventListener('click', ({ target }) => {
+    if (target && target instanceof HTMLButtonElement) {
+      const targetPlus: HTMLButtonElement | null = target.closest('.count__plus');
+      const targetMinus: HTMLButtonElement | null = target.closest('.count__minus');
+      if (targetPlus) {
+        addCart(targetPlus.dataset.idProduct)
+      }
+      if (targetMinus) {
+        removeCart(targetMinus.dataset.idProduct)
+      }
+    }
+  })
 }
 
 export const cartInint = () => {
