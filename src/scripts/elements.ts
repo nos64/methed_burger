@@ -16,7 +16,16 @@ export const catalogTitle: HTMLElement | null = document.querySelector('.catalog
 export const modalProductBtn: HTMLButtonElement | null = document.querySelector('.modal-product__btn');
 
 export const countAmount: HTMLParagraphElement | null = document.querySelector('.modal-product .count__amount');
-
+export const modalProductCount: HTMLDivElement | null = document.querySelector('.modal-product__count');
 export const orderCount: HTMLSpanElement | null = document.querySelector('.order__count');
 export const orderList: HTMLUListElement | null = document.querySelector('.order__list');
 export const orderTotalAmount: HTMLSpanElement | null = document.querySelector('.order__total-amount');
+
+export const orderWrapTitle: HTMLDivElement | null =  document.querySelector('.order__wrap-title');
+export const order: HTMLDivElement | null =  document.querySelector('.order');
+export const orderSubmit: HTMLButtonElement | null = document.querySelector('.order__submit');
+
+export const modalDelivery: HTMLDivElement | null = document.querySelector('.modal_delivery');
+export const modalDeliveryForm: HTMLFormElement | null = document.querySelector('.modal-delivery__form');
+
+export const modalDeliveryContainer: HTMLDivElement | null = document.querySelector('.modal-delivery__container');

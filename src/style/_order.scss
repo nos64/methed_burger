@@ -11,6 +11,9 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
   border-radius: 12px;
   padding: 16px 10px;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .order__wrap_list {
@@ -26,6 +29,10 @@
   justify-content: space-between;
   align-items: center;
   outline: none;
+}
+
+.order__wrap-title:hover .order__title {
+  color: $contrast-background;
 }
 
 .order__wrap-title::after {
@@ -49,6 +56,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
+  transition: color 0.3s ease-in-out;
 }
 
 .order__count {
@@ -152,6 +160,7 @@
 .order__submit:disabled {
   background-color: $background-color;
   color: $disabled-color;
+  cursor: no-drop;
 }
 
 .order__wrap-apeal {
@@ -208,6 +217,11 @@
   .order__wrap-title::after {
     content: none;
     pointer-events: none;
+  }
+
+  .order__wrapper:hover .order__title {
+    color: inherit;
+    cursor: default;
   }
 
   .order__title {

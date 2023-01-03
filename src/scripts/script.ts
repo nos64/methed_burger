@@ -2,6 +2,7 @@ import { cartInint } from './cart';
 import { 
   modalProduct,
   catalogList,
+  countAmount,
 } from './elements';
 import { navigationListContoller } from './navigationListController';
 import { openModal } from './openModal';
@@ -33,6 +34,9 @@ modalProduct?.addEventListener('click', (e: MouseEvent) => {
     && target.closest('.modal__close')
     || target === modalProduct) {
     modalProduct?.classList.remove('modal_open');
+    if (countAmount && countAmount.textContent) {
+      countAmount.textContent = '1';
+    }
   }
 });
 

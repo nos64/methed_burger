@@ -1,10 +1,13 @@
 import { ICartItem } from "../types/ICartItem";
 import { IProduct } from "../types/IProduct";
-import { catalogList, countAmount, modalProductBtn, orderCount, orderList, orderTotalAmount } from "./elements";
+import { catalogList, countAmount, modalDelivery, modalProductBtn, modalProductCount, order, orderCount, orderList, orderSubmit, orderTotalAmount, orderWrapTitle } from "./elements";
 import { getData } from './getData';
 import { API_URL, PREFIX_PRODUCT } from './constants';
+import { orderController } from "./orderController";
 
-const getCart = () => {
+type getCartType = ()=> ICartItem[] | [];
+
+const getCart: getCartType = () => {
   const cartList = localStorage.getItem('cart');
   if (cartList) {
     return JSON.parse(cartList);
@@ -14,7 +17,11 @@ const getCart = () => {
 
 const renderCartList = async () => {
   const cartList: ICartItem[] = getCart();
-  console.log('cartList: ', cartList);
+
+  if (orderSubmit) {
+    orderSubmit.disabled = !cartList.length;
+  }
+  
   const allIdProduct = cartList.map((item: ICartItem) => item.id)
   const data = cartList.length
   ? await getData(`${API_URL}${PREFIX_PRODUCT}/?list=${allIdProduct}`)
@@ -122,10 +129,49 @@ const cartController = () => {
         removeCart(targetMinus.dataset.idProduct)
       }
     }
+  });
+
+  modalProductCount?.addEventListener('click', ({ target }) => {
+    if (target && target instanceof HTMLButtonElement) {
+      const targetPlus: HTMLButtonElement | null = target.closest('.count__plus');
+      const targetMinus: HTMLButtonElement | null = target.closest('.count__minus');
+      if (countAmount && countAmount.textContent) {
+        let count = parseInt(countAmount.textContent, 10);
+        if (targetPlus) {
+          countAmount.textContent = (count += 1).toString();
+        }
+        if (targetMinus) {
+          countAmount.textContent = (count -= 1).toString();
+        }
+      }
+    }
+  });
+  
+  orderWrapTitle?.addEventListener('click', () => {
+    order?.classList.toggle('order_open');
+  });
+
+
+  orderSubmit?.addEventListener('click', () => {
+    modalDelivery?.classList.add('modal_open')
+  })
+
+  modalDelivery?.addEventListener('click', ({target}) => {
+    if (target && target instanceof SVGElement 
+      && target.closest('.modal__close') 
+      || target === modalDelivery) {
+      modalDelivery?.classList.remove('modal_open');
+    }
   })
 }
+
+export const clearCart = () => {
+  localStorage.removeItem('cart');
+  renderCartList();
+};
 
 export const cartInint = () => {
   cartController();
   renderCartList();
+  orderController(getCart, clearCart);
 }
