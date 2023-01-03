@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const mode = process.env.NODE_END || 'development';
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const devMode = mode === 'development';
 
@@ -18,7 +19,7 @@ module.exports = {
     open: true,
     hot: true,
   },
-  entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.js')],
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.ts')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
@@ -32,7 +33,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
-    new SpriteLoaderPlugin()
+    new SpriteLoaderPlugin(),
+    new ESLintPlugin({
+      extensions: ['ts', 'js']
+    }),
   ],
   module: {
     rules: [
@@ -113,7 +117,15 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
-      }
+      },
+      {
+        test: /\.[tj]s$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ]
-  }
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
 }

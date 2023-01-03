@@ -8,14 +8,12 @@
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
   <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#ffc40d">
   <meta name="theme-color" content="#ffffff">
   <link rel="preload" href="fonts/nunito-v25-latin_cyrillic-regular.woff2" as="fonts" crossorigin>
   <link rel="preload" href="fonts/nunito-v25-latin_cyrillic-600.woff2" as="fonts" crossorigin>
   <link rel="preload" href="fonts/nunito-v25-latin_cyrillic-800.woff2" as="fonts" crossorigin>
-
 
 </head>
 <body>
@@ -42,31 +40,67 @@
       <div class="container navigation__container">
         <ul class="navigation__list">
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_burger navigation__button_active">Бургеры</button>
+            <button 
+              class="navigation__button navigation__button_burger navigation__button_active"
+              data-category="burger">
+              Бургеры
+            </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_snack">Закуски</button>
+            <button 
+              class="navigation__button navigation__button_snack"
+              data-category="snack">
+              Закуски
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_hot-dog">Хот-доги</button>
+            <button 
+              class="navigation__button navigation__button_hot-dog"
+              data-category="hot-dog">
+              Хот-доги
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_combo">Комбо</button>
+            <button 
+              class="navigation__button navigation__button_combo"
+              data-category="combo">
+              Комбо
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_shawarma">Шаурма</button>
+            <button 
+              class="navigation__button navigation__button_shawarma"
+              data-category="shawarma">
+              Шаурма
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_pizza">Пицца</button>
+            <button 
+              class="navigation__button navigation__button_pizza"
+              data-category="pizza">
+              Пицца
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_wok">Вок</button>
+            <button 
+              class="navigation__button navigation__button_wok"
+              data-category="wok">
+              Вок
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_desert">Десерты</button>
+            <button 
+              class="navigation__button navigation__button_desert"
+              data-category="dessert">
+              Десерты
+          </button>
           </li>
           <li class="navigation__item">
-            <button class="navigation__button navigation__button_sauce">Соусы</button>
+            <button 
+              class="navigation__button navigation__button_sauce"
+              data-category="sauce">
+              Соусы
+          </button>
           </li>
         </ul>
       </div>
@@ -79,76 +113,20 @@
           <section class="order__wrapper">
             <div class="order__wrap-title" tabindex="0" role="button">
               <h2 class="order__title">Корзина</h2>
-              <span class="order__count">4</span>
+              <span class="order__count">0</span>
             </div>
 
             <div class="order__wrap_list">
-              <ul class="order__list">
-                
-                <li class="order__item">
-                  <img class="order__image" src="./img/burger_1.jpg" alt="Супер сырный">
-
-                  <div class="order__product">
-                    <h3 class="order__product-title">Супер сырный</h3>
-                    <p class="order__product-weight">512г</p>
-                    <p class="order__product-price">550
-                      <span class="currency">₽</span>
-                    </p>
-                  </div>
-
-                  <div class="order__product-count count">
-                    <button class="count__minus">-</button>
-                    <p class="count__amount">1</p>
-                    <button class="count__plus">+</button>
-                  </div>
-                </li>
-
-                <li class="order__item">
-                  <img class="order__image" src="./img/free_1.jpg" alt="Картошка фри">
-
-                  <div class="order__product">
-                    <h3 class="order__product-title">Картошка фри</h3>
-                    <p class="order__product-weight">180г</p>
-                    <p class="order__product-price">245
-                      <span class="currency">₽</span>
-                    </p>
-                  </div>
-
-                  <div class="order__product-count count">
-                    <button class="count__minus">-</button>
-                    <p class="count__amount">2</p>
-                    <button class="count__plus">+</button>
-                  </div>
-                </li>
-
-                <li class="order__item">
-                  <img class="order__image" src="./img/hot-dog_1.jpg" alt="Жгучий хот-дог">
-
-                  <div class="order__product">
-                    <h3 class="order__product-title">Жгучий хот-дог</h3>
-                    <p class="order__product-weight">245г</p>
-                    <p class="order__product-price">239
-                      <span class="currency">₽</span>
-                    </p>
-                  </div>
-
-                  <div class="order__product-count count">
-                    <button class="count__minus">-</button>
-                    <p class="count__amount">1</p>
-                    <button class="count__plus">+</button>
-                  </div>
-                </li>
-              </ul>
-
+              <ul class="order__list"></ul>
               <div class="order__total">
                 <p>Итого</p>
                 <p>
-                  <span class="order__total-amount">1279</span>
+                  <span class="order__total-amount">0</span>
                   <span class="currency">₽</span>
                 </p>
               </div>
 
-                <button class="order__submit">Оформить заказ</button>
+                <button class="order__submit" type="button">Оформить заказ</button>
                 <div class="order__wrap-apeal">
                   <p class="order__apeal">Бесплатная доставка</p>
                   <button class="order__close">Свернуть</button>
@@ -161,110 +139,7 @@
           <h2 class="catalog__title">Бургеры</h2>
 
           <div class="catalog__warp-list">
-            <ul class="catalog__list">
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo-5.jpg" alt="Мясная бомба">
-                  <p class="product__price">689
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Мясная бомба
-                    </button>
-                  </h3>
-                  <p class="product__weight">520г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo-1.jpg" alt="Супер сырный">
-                  <p class="product__price">550
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Супер сырный
-                    </button>
-                  </h3>
-                  <p class="product__weight">512г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo-3.jpg" alt="Сытный">
-                  <p class="product__price">639
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Сытный
-                    </button>
-                  </h3>
-                  <p class="product__weight">580г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo.jpg" alt="Тяжелый удар">
-                  <p class="product__price">480
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Тяжелый удар
-                    </button>
-                  </h3>
-                  <p class="product__weight">470г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo-2.jpg" alt="Вечная классика">
-                  <p class="product__price">450
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Мясная бомба
-                    </button>
-                  </h3>
-                  <p class="product__weight">450г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-
-              <li class="catalog__item">
-                <article class="product">
-                  <img class="product__image" src="./img/photo-4.jpg" alt="Итальянский">
-                  <p class="product__price">560
-                    <span class="currency">₽</span>
-                  </p>
-
-                  <h3 class="ptoduct__title">
-                    <button class="product__detail">
-                      Итальянский
-                    </button>
-                  </h3>
-                  <p class="product__weight">520г</p>
-                  <button class="product__add" type="button">Добавить</button>
-                </article>
-              </li>
-            </ul>
+            <ul class="catalog__list"></ul>
           </div>
         </div>
       </div>
@@ -360,7 +235,8 @@
             </div>
           </div>
 
-          <p class="modal-product__price">550
+          <p class="modal-product__price">
+            <span class="modal-product__price-count">550</span>
             <span class="currency">₽</span>
           </p>
 
@@ -375,30 +251,33 @@
     </div>
   </div>
   <!-- For modal-window open please add class -  modal_open -->
-  <div class="modal modal__delivery">
+  <div class="modal modal_delivery">
     <div class="modal__main modal-delivery">
       <div class="modal-delivery__container">
         <h2 class="modal-delivery__title">Доставка</h2>
         <form class="modal-delivery__form" action="" id="delivery">
           <fieldset class="modal-delivery__fieldset">
-            <input class="modal-delivery__input" type="text" name="name"  placeholder="Ваше имя">
-            <input class="modal-delivery__input" type="tel" name="phone"  placeholder="Телефон">
+            <input class="modal-delivery__input" type="text" name="name" required placeholder="Ваше имя">
+            <input class="modal-delivery__input" type="tel" name="phone" required placeholder="Телефон">
           </fieldset>
 
           <fieldset class="modal-delivery__fieldset modal-delivery__fieldset_radio">
             <label class="modal-delivery__label">
-              <input class="modal-delivery__radio" type="radio" name="format-delivery" value="pickup">
+              <input class="modal-delivery__radio" type="radio" name="format" value="pickup" checked>
               Самовывоз
             </label>
             <label class="modal-delivery__label">
               
-              <input class="modal-delivery__radio" checked type="radio" name="format-delivery" value="delivery">
+              <input class="modal-delivery__radio" type="radio" name="format" value="delivery">
               Доставка
             </label>
           </fieldset>
 
-          <fieldset class="modal-delivery__fieldset">
-            <input class="modal-delivery__input" type="address" name="name"  placeholder="Улица, дом, квартира">
+          <fieldset
+            class="modal-delivery__fieldset modal-delivery__fieldset_hide"
+            name="address-info"
+          >
+            <input class="modal-delivery__input" type="address" name="address"  placeholder="Улица, дом, квартира">
             <input class="modal-delivery__input modal_delivery__input_half" type="number" name="floor"  placeholder="Этаж">
             <input class="modal-delivery__input modal_delivery__input_half" type="number" name="intercom"  placeholder="Домофон">
           </fieldset>
@@ -412,11 +291,5 @@
       </button>
     </div>
   </div>
-
-  <script>
-    document.querySelector('.order__wrap-title').addEventListener('click', () => {
-      document.querySelector('.order').classList.toggle('order_open');
-    })
-  </script>
 </body>
 </html>
