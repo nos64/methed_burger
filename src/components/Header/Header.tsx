@@ -1,6 +1,7 @@
 import Container from '../Container';
 import React from 'react';
 import styles from './Header.module.scss';
+import SVGPics from '../../assets/images/_sprite.svg';
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
             role="img"
             aria-label="Логотип YourMeal"
           >
-            <use href="#_sprite_logo" />
+            <use href={`${SVGPics}#logo`} />
           </svg>
           <div className={styles.header__titleContainer}>
             <h1 className={styles.header__title}>
