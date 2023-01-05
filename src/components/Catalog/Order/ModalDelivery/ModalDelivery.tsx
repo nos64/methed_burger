@@ -1,5 +1,5 @@
 import ModalWrapper from '../../../ModalWrapper';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ModalDelivery.module.scss';
 
 interface IModalDeliveryProps {
@@ -8,6 +8,8 @@ interface IModalDeliveryProps {
 }
 
 const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModalActive }) => {
+  const [isDeliveryChecked, setIsDeliveryChecked] = useState(false);
+
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
       <div className={styles.modalDelivery}>
@@ -42,7 +44,8 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
                   type="radio"
                   name="format"
                   value="pickup"
-                  checked
+                  defaultChecked
+                  onChange={() => setIsDeliveryChecked(false)}
                 />
                 Самовывоз
               </label>
@@ -52,13 +55,19 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
                   type="radio"
                   name="format"
                   value="delivery"
+                  checked={isDeliveryChecked}
+                  onChange={() => setIsDeliveryChecked(true)}
                 />
                 Доставка
               </label>
             </fieldset>
 
             <fieldset
-              className={styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_hide}
+              className={
+                !isDeliveryChecked
+                  ? styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_hide
+                  : styles.modalDelivery__fieldset
+              }
               name="address-info"
             >
               <input
