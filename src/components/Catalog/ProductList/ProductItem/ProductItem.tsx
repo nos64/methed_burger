@@ -1,21 +1,25 @@
 import React from 'react';
 import styles from './ProductItem.module.scss';
-import burger from '../../../../assets/images/photo-5.jpg';
+import { IProduct } from '../../../../types/IProduct';
+import { API_URL } from 'common/constants';
 
-const ProductItem = () => {
+interface IProductProps {
+  item: IProduct;
+}
+const ProductItem: React.FC<IProduct> = ({ ...item }) => {
   return (
     <li className={styles.catalog__item}>
       <article className={styles.product}>
-        <img className={styles.product__image} src={burger} alt="Мясная бомба" />
+        <img className={styles.product__image} src={`${API_URL}/${item.image}`} alt={item.title} />
         <p className={styles.product__price}>
-          689
-          <span className={styles.currency}>₽</span>
+          {item.price}
+          <span className={styles.currency}> ₽</span>
         </p>
 
         <h3 className={styles.ptoduct__title}>
-          <button className={styles.product__detail}>Мясная бомба</button>
+          <button className={styles.product__detail}>{item.title}</button>
         </h3>
-        <p className={styles.product__weight}>520г</p>
+        <p className={styles.product__weight}>{item.weight}г</p>
         <button className={styles.product__add} type="button">
           Добавить
         </button>
