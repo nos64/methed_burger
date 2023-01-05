@@ -1,0 +1,233 @@
+@import '../../../../styles/colors';
+
+.modalProduct {
+  background-color: $light-color;
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 10px;
+  display: flex;
+}
+
+.modalProduct__container {
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalProduct__title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 120%;
+  margin-bottom: 12px;
+}
+
+.modalProduct__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.modalProduct__image {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.modalProduct__description {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 130%;
+  margin-bottom: 10px;
+}
+
+.modalProduct__ingredients {
+  flex-grow: 1;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.ingredients__title {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 130%
+}
+
+.ingredients__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 130%;
+}
+
+.ingredients__calories {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 130%;
+  color: $light-text;
+}
+
+.modalProduct__count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 74px;
+  height: 30px;
+  background: $light-background;
+  border-radius: 8px;
+  padding: 7px 8px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.count__minus,
+.count__plus {
+  width: 8px;
+}
+
+.modalProduct__add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  margin-bottom: 16px;
+}
+
+.modalProduct__btn {
+  flex-grow: 1;
+  padding: 9px;
+  background-color: $button-color;
+  color: $light-color;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  border-radius: 8px;
+}
+
+.modalProduct__price {
+  text-align: right;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 130%;
+}
+
+.currency {
+  font-weight: 400;
+}
+
+@media (min-width: 480px) {
+  .modalProduct {
+    max-width: 524px;
+    min-height: auto;
+    width: 100%;
+    padding: 16px 16px 24px;
+    display: flex;
+    border-radius: 24px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .modalProduct__container {
+    max-width: unset;
+  }
+  
+  .modalProduct__title {
+    margin-bottom: 16px;
+  }
+  
+  .modalProduct__content {
+    display: grid;
+    grid-template-columns: 226px 1fr;
+    grid-template-rows: min-content 1fr;
+    gap: 10px 8px;
+    margin-bottom: 22px;
+  }
+  
+  .modalProduct__image {
+    grid-row: 1 / -1;
+    margin-bottom: 0;
+  }
+  
+  .modalProduct__description {
+    grid-row: 1 / 1;
+  }
+  
+  .modalProduct__ingredients {
+    grid-row: 2 / 3;
+    margin-bottom: 0;
+  }
+  
+  .modalProduct__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .modalProduct__add {
+    margin-bottom: 0;
+  }
+
+  .modalProduct__btn {
+    flex-grow: 0;
+    width: 218px;
+  }
+  
+}
+
+@media (min-width: 1024px) {
+  .modalProduct {
+    max-width: 684px;
+    padding: 24px 24px 36px;
+  }
+
+  .modalProduct__container {
+    max-width: unset;
+  }
+  
+  .modalProduct__title {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  
+  .modalProduct__content {
+    grid-template-columns: 276px 1fr;
+    gap: 16px 10px;
+    margin-bottom: 38px;
+  }
+  
+  .modalProduct__description {
+    font-size: 16px;
+    line-height: 130%;
+  }
+
+  .ingredients__title,
+  .ingredients__list,
+  .ingredients__calories {
+    font-size: 12px;
+  }
+
+  .modalProduct__btn {
+    padding: 12px;
+    width: 276px;
+  }
+
+  .count {
+    min-width: 84px;
+    height: 40px;
+    border-radius: 12px;
+    padding: 9px 12px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  
+  .count__minus,
+  .count__plus {
+    width: 10px;
+  }
+
+  .modalProduct__price {
+    font-size: 24px;
+  }
+}
