@@ -20,7 +20,7 @@ export const getDataFromServer = createAsyncThunk<IProduct[], void, { rejectValu
 
 interface IProductState {
   products: IProduct[];
-  activeProduct: IProduct | null;
+  // activeProduct: IProduct | null;
   isPending: boolean;
   error: string | undefined;
   isNoData: boolean;
@@ -28,7 +28,7 @@ interface IProductState {
 
 const initialState: IProductState = {
   products: [],
-  activeProduct: null,
+  // activeProduct: null,
   isPending: false,
   error: undefined,
   isNoData: false,
@@ -41,14 +41,12 @@ const productSlice = createSlice({
     // addToCart(state, action: PayloadAction<ICartItem>) {
     //   state.cartItems.push(action.payload);
     // },
-    setActiveProduct(state, action: PayloadAction<IProduct | null>) {
-      state.activeProduct = action.payload;
-    },
+    // setActiveProduct(state, action: PayloadAction<IProduct | null>) {
+    //   state.activeProduct = action.payload;
+    // },
     // incrementCount() {
-
     // },
     // decrementCount() {
-
     // },
   },
   extraReducers: (builder) => {
@@ -71,5 +69,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setActiveProduct } = productSlice.actions;
+// export const { setActiveProduct } = productSlice.actions;
 export default productSlice.reducer;

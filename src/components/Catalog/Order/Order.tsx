@@ -27,7 +27,7 @@ const Order = () => {
         <section className={styles.order__wrapper}>
           <div className={styles.order__wrapTitle}>
             <h2 className={styles.order__title}>Корзина</h2>
-            <span className={styles.order__count}>4</span>
+            <span className={styles.order__count}>0</span>
           </div>
 
           <div className={styles.order__wrap_list} onClick={(e) => e.stopPropagation()}>
