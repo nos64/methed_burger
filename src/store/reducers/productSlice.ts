@@ -21,16 +21,16 @@ export const getDataFromServer = createAsyncThunk<IProduct[], void, { rejectValu
 interface IProductState {
   products: IProduct[];
   activeProduct: IProduct | null;
-  isLoading: boolean;
-  error: string | null;
+  isPending: boolean;
+  error: string | undefined;
   isNoData: boolean;
 }
 
 const initialState: IProductState = {
   products: [],
   activeProduct: null,
-  isLoading: false,
-  error: null,
+  isPending: false,
+  error: undefined,
   isNoData: false,
 };
 
@@ -54,15 +54,16 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getDataFromServer.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.isPending = true;
+        state.error = undefined;
       })
       .addCase(getDataFromServer.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isPending = false;
         state.products = action.payload;
       })
       .addCase(getDataFromServer.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isPending = false;
+        state.error = action.payload;
         if (action.payload === 'Server Error!') {
           state.isNoData = true;
         }

@@ -9,6 +9,9 @@ import { getDataFromServer } from 'store/reducers/productSlice';
 
 const ProductList = () => {
   const products = useAppSelector((store) => store.product.products);
+  const isNoData = useAppSelector((store) => store.product.isNoData);
+  const isPending = useAppSelector((store) => store.product.isPending);
+  const error = useAppSelector((store) => store.product.error);
   const dispatch = useAppDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
   // const [activeCard, setActiveCard] = useState<IProduct | null>(null);
@@ -17,8 +20,6 @@ const ProductList = () => {
     dispatch(getDataFromServer());
   }, [dispatch]);
 
-  const data = getData();
-  console.log(data);
   const handleCloseModal = () => {
     setIsModalActive(false);
     // setActiveItem(null);
@@ -31,9 +32,12 @@ const ProductList = () => {
 
         <div className={styles.catalog__warpList}>
           <ul className={styles.catalog__list}>
-            {products.map((item) => (
-              <ProductItem key={item.id} {...item} />
-            ))}
+            {isPending && <h2>...Loading</h2>}
+            {!error ? (
+              products.map((item) => <ProductItem key={item.id} {...item} />)
+            ) : (
+              <h2>An error occered: {error}</h2>
+            )}
           </ul>
         </div>
       </div>
