@@ -7,7 +7,8 @@ import { useAppDispatch } from './../../../hooks/redux';
 import { getDataFromServer } from 'store/reducers/productSlice';
 import { IProduct } from 'types/IProduct';
 
-const ProductList = () => {
+const ProductList: React.FC = () => {
+  const activeCategory = useAppSelector((store) => store.product.activeCategory);
   const products = useAppSelector((store) => store.product.products);
   const isNoData = useAppSelector((store) => store.product.isNoData);
   const isPending = useAppSelector((store) => store.product.isPending);
@@ -33,7 +34,7 @@ const ProductList = () => {
   return (
     <>
       <div className={styles.catalog__wrapper}>
-        <h2 className={styles.catalog__title}>Бургеры</h2>
+        <h2 className={styles.catalog__title}>{activeCategory.buttonText}</h2>
 
         <div className={styles.catalog__warpList}>
           <ul className={styles.catalog__list}>

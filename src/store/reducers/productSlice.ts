@@ -1,7 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getData } from '../../api/getData';
 import { AxiosError } from 'axios';
 import { IProduct } from '../../types/IProduct';
+import { INavItem } from 'types/INavItem';
+import { navPanelData } from 'common/navPanelData';
 
 export const getDataFromServer = createAsyncThunk<IProduct[], void, { rejectValue: string }>(
   'product/getDataFromServer',
@@ -20,7 +22,7 @@ export const getDataFromServer = createAsyncThunk<IProduct[], void, { rejectValu
 
 interface IProductState {
   products: IProduct[];
-  // activeProduct: IProduct | null;
+  activeCategory: INavItem;
   isPending: boolean;
   error: string | undefined;
   isNoData: boolean;
@@ -28,7 +30,7 @@ interface IProductState {
 
 const initialState: IProductState = {
   products: [],
-  // activeProduct: null,
+  activeCategory: navPanelData[0],
   isPending: false,
   error: undefined,
   isNoData: false,
@@ -37,7 +39,11 @@ const initialState: IProductState = {
 const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveCategory(state, action: PayloadAction<INavItem>) {
+      state.activeCategory = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getDataFromServer.pending, (state) => {
@@ -58,5 +64,5 @@ const productSlice = createSlice({
   },
 });
 
-// export const { setActiveProduct } = productSlice.actions;
+export const { setActiveCategory } = productSlice.actions;
 export default productSlice.reducer;

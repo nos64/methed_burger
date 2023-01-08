@@ -4,7 +4,7 @@ import styles from './Catalog.module.scss';
 import Order from './Order';
 import ProductList from './ProductList';
 
-const Catalog = () => {
+const Catalog: React.FC = () => {
   return (
     <section className={styles.catalog}>
       <Container>

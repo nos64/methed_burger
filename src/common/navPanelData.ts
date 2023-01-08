@@ -13,7 +13,7 @@ export const navPanelData = [
   },
   {
     id: 2,
-    modificator: 'hotDog',
+    modificator: 'hot-dog',
     buttonText: 'Хот-доги',
     isActive: false,
   },

@@ -1,24 +1,26 @@
 import React from 'react';
+import { INavItem } from 'types/INavItem';
 import styles from './NavItem.module.scss';
 
 interface INavItemProps {
-  id: number;
-  modificator: string;
-  buttonText: string;
-  isActive: boolean;
+  item: INavItem;
+  handleCategoryBtnClick: (id: number) => void;
 }
 
-const NavItem: React.FC<INavItemProps> = ({ modificator, buttonText, isActive }) => {
+const NavItem: React.FC<INavItemProps> = ({ item, handleCategoryBtnClick }) => {
   return (
     <li className={styles.navigation__item}>
       <button
         className={
-          isActive
-            ? `${styles.navigation__button} ${styles[modificator]} ${styles.navigation__button_active}`
-            : `${styles.navigation__button} ${styles[modificator]}`
+          item.isActive
+            ? `${styles.navigation__button} ${styles[item.modificator]} ${
+                styles.navigation__button_active
+              }`
+            : `${styles.navigation__button} ${styles[item.modificator]}`
         }
+        onClick={() => handleCategoryBtnClick(item.id)}
       >
-        {buttonText}
+        {item.buttonText}
       </button>
     </li>
   );
