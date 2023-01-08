@@ -43,7 +43,7 @@ export const navPanelData = [
   },
   {
     id: 7,
-    modificator: 'desert',
+    modificator: 'dessert',
     buttonText: 'Десерты',
     isActive: false,
   },

@@ -16,10 +16,16 @@ const ProductList: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
   const [activeProduct, setActiveProduct] = useState<IProduct | null>(null);
+  const [visibleProductCategory, setVisibleProductCategory] = useState<IProduct[]>([]);
 
   useEffect(() => {
     dispatch(getDataFromServer());
   }, [dispatch]);
+
+  useEffect(() => {
+    const visibleProducts = products.filter((item) => item.category === activeCategory.modificator);
+    setVisibleProductCategory(visibleProducts);
+  }, [activeCategory, products]);
 
   const handleProductClick = (item: IProduct | null) => {
     setIsModalActive(!isModalActive);
@@ -40,7 +46,7 @@ const ProductList: React.FC = () => {
           <ul className={styles.catalog__list}>
             {isPending && <h2>...Loading</h2>}
             {!error ? (
-              products.map((item: IProduct) => (
+              visibleProductCategory.map((item: IProduct) => (
                 <ProductItem
                   key={item.id}
                   item={item}
