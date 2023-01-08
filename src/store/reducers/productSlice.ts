@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getData } from '../../api/getData';
 import { AxiosError } from 'axios';
 import { IProduct } from '../../types/IProduct';
@@ -37,18 +37,7 @@ const initialState: IProductState = {
 const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {
-    // addToCart(state, action: PayloadAction<ICartItem>) {
-    //   state.cartItems.push(action.payload);
-    // },
-    // setActiveProduct(state, action: PayloadAction<IProduct | null>) {
-    //   state.activeProduct = action.payload;
-    // },
-    // incrementCount() {
-    // },
-    // decrementCount() {
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getDataFromServer.pending, (state) => {

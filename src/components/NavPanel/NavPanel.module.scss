@@ -18,13 +18,6 @@
   overflow-y: hidden;
 }
 
-@media (min-width: 480px) {
-  $container: 640px;
-  .navigation__list {
-    padding: 0 calc((100vw / 2) - ($container / 2));
-  }
-}
-
 @media (min-width: 768px) {
   .navigation__list {
     column-gap: 12px;
@@ -32,9 +25,7 @@
 }
 
 @media (min-width: 1024px) {
-  $container: 960px;
   .navigation__list {
-    padding: 0 calc((100vw / 2) - ($container / 2));
     column-gap: 24px;
   }
   .navigation {
@@ -42,10 +33,4 @@
   }
 }
 
-@media (min-width: 1360px) {
-  $container: 1290px;
-  .navigation__list {
-    padding: 0 calc((100vw / 2) - ($container / 2));
-  }
-}
 

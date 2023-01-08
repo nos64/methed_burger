@@ -74,30 +74,31 @@
   line-height: 100%;
   padding: 9px;
   transition: transform 0.2s ease, background-color 0.3s ease-in-out;
-}
 
-.product__add:hover {
-  background-color: $contrast-background;
-}
-
-.product__add:focus-visible {
-  background-color: $hover-color;
-}
-
-.product__add:active {
-  transform: translate(1px, 1px);
-}
-
-.product__add:disabled {
-  background-color: $background-color;
-  color: $disabled-color;
-}
-
-@supports not selector(:focus-visible) {
-  .product__add:focus {
+  &:hover {
+    background-color: $contrast-background;
+  }
+  
+  &:focus-visible {
     background-color: $hover-color;
   }
+  
+  &:active {
+    transform: translate(1px, 1px);
+  }
+  
+  &:disabled {
+    background-color: $background-color;
+    color: $disabled-color;
+  }
+  
+  @supports not selector(:focus-visible) {
+    &:focus {
+      background-color: $hover-color;
+    }
+  }
 }
+
 
 @media (min-width: 1024px) {
   .product {

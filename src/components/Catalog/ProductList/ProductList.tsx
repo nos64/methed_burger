@@ -39,12 +39,11 @@ const ProductList = () => {
           <ul className={styles.catalog__list}>
             {isPending && <h2>...Loading</h2>}
             {!error ? (
-              products.map((item) => (
+              products.map((item: IProduct) => (
                 <ProductItem
-                  item={item}
                   key={item.id}
-                  {...item}
-                  handleProductClick={() => handleProductClick({ ...item })}
+                  item={item}
+                  handleProductClick={() => handleProductClick(item)}
                 />
               ))
             ) : (

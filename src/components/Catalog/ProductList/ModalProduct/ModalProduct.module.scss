@@ -105,6 +105,29 @@
   font-size: 12px;
   line-height: 100%;
   border-radius: 8px;
+
+  &:hover {
+    background-color: $contrast-background;
+  }
+  
+  &:focus-visible {
+    background-color: $hover-color;
+  }
+  
+  &:active {
+    transform: translate(1px, 1px);
+  }
+  
+  &:disabled {
+  background-color: $background-color;
+  color: $disabled-color;
+  }
+
+  @supports not selector(:focus-visible) {
+    &:focus {
+      background-color: $hover-color;
+    }
+  }
 }
 
 .modalProduct__price {
