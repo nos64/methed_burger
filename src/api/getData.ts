@@ -4,8 +4,11 @@ import { IProduct } from '../types/IProduct';
 import { PREFIX_PRODUCT } from '../common/constants';
 
 // export const getData = async (): Promise<IProduct[]> => {
-// const productData = await api.get(`${PREFIX_PRODUCT}`);
-// return productData.data;
-export const getData = async (): Promise<IProduct[]> => {
-  return await api.get<IProduct[]>(`${PREFIX_PRODUCT}`).then((res) => res.data);
+//   return await api.get<IProduct[]>(`${PREFIX_PRODUCT}`).then((res) => res.data);
+// };
+
+export const getProductCategoryData = async (category: string): Promise<IProduct[]> => {
+  return await api
+    .get<IProduct[]>(`${PREFIX_PRODUCT}?category=${category}`)
+    .then((res) => res.data);
 };
