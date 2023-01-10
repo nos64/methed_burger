@@ -1,3 +1,4 @@
+import { useAppSelector } from 'hooks/redux';
 import React, { useState } from 'react';
 import ModalDelivery from './ModalDelivery';
 import styles from './Order.module.scss';
@@ -7,6 +8,7 @@ const Order = () => {
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
   const [isModalActive, setIsModalActive] = useState(false);
+  const cartItems = useAppSelector((store) => store.cart.cartItems);
 
   const handleCloseModal = () => {
     setIsModalActive(false);
@@ -43,7 +45,11 @@ const Order = () => {
               </p>
             </div>
 
-            <button className={styles.order__submit} onClick={handleDeliveryBtmClick}>
+            <button
+              className={styles.order__submit}
+              onClick={handleDeliveryBtmClick}
+              disabled={!cartItems.length}
+            >
               Оформить заказ
             </button>
             <div className={styles.order__wrapApeal}>

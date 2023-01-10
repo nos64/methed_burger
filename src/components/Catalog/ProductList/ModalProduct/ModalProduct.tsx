@@ -1,8 +1,10 @@
 import ModalWrapper from '../../../ModalWrapper';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ModalProduct.module.scss';
 import { IProduct } from 'types/IProduct';
 import { API_URL } from 'common/constants';
+import { useAppDispatch } from 'hooks/redux';
+import { addToCart } from 'store/reducers/cartSlice';
 
 interface IModalProductProps {
   isModalActive: boolean;
@@ -15,6 +17,21 @@ const ModalProduct: React.FC<IModalProductProps> = ({
   setIsModalActive,
   activeProduct,
 }) => {
+  const dispatch = useAppDispatch();
+  const [count, setCount] = useState(1);
+  const incrementCount = () => {
+    setCount((count) => (count += 1));
+  };
+
+  const decrementCount = () => {
+    if (count <= 1) return;
+    setCount((count) => (count -= 1));
+  };
+
+  const addToCartClick = (id: string, count = 1) => {
+    dispatch(addToCart({ id, count }));
+  };
+
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
       {activeProduct && (
@@ -48,12 +65,21 @@ const ModalProduct: React.FC<IModalProductProps> = ({
             </div>
             <div className={styles.modalProduct__footer}>
               <div className={styles.modalProduct__add}>
-                <button className={styles.modalProduct__btn}>Добавить</button>
+                <button
+                  className={styles.modalProduct__btn}
+                  onClick={() => addToCartClick(activeProduct.id, count)}
+                >
+                  Добавить
+                </button>
 
                 <div className={styles.modalProduct__count + ' ' + styles.count}>
-                  <button className={styles.count__minus}>-</button>
-                  <p className={styles.count__amount}>1</p>
-                  <button className={styles.count__plus}>+</button>
+                  <button className={styles.count__minus} onClick={decrementCount}>
+                    -
+                  </button>
+                  <p className={styles.count__amount}>{count}</p>
+                  <button className={styles.count__plus} onClick={incrementCount}>
+                    +
+                  </button>
                 </div>
               </div>
 
