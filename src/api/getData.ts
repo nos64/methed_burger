@@ -12,3 +12,7 @@ export const getProductCategoryData = async (category: string): Promise<IProduct
     .get<IProduct[]>(`${PREFIX_PRODUCT}?category=${category}`)
     .then((res) => res.data);
 };
+
+export const getCartDataFromIDsList = async (list: (string | undefined)[]): Promise<IProduct[]> => {
+  return await api.get<IProduct[]>(`${PREFIX_PRODUCT}?list=${list}`).then((res) => res.data);
+};

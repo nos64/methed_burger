@@ -1,5 +1,6 @@
-import { useAppSelector } from 'hooks/redux';
-import React, { useState } from 'react';
+import { useAppSelector, useAppDispatch } from 'hooks/redux';
+import React, { useEffect, useState } from 'react';
+import { getCartData } from 'store/reducers/cartSlice';
 import ModalDelivery from './ModalDelivery';
 import styles from './Order.module.scss';
 import OrderItem from './OrderItem';
@@ -9,6 +10,17 @@ const Order = () => {
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
   const [isModalActive, setIsModalActive] = useState(false);
   const cartItems = useAppSelector((store) => store.cart.cartItems);
+  const dispatch = useAppDispatch();
+  const cartProducts = useAppSelector((store) => store.cart.cartProducts);
+  const [orderCount, setOrderCount] = useState(0);
+  useEffect(() => {
+    if (cartItems.length) {
+      const cartListIds = cartItems.map((item) => item.product.id);
+      dispatch(getCartData(cartListIds));
+      const orderSum = cartItems.reduce((acc, item) => acc + item.count, 0);
+      setOrderCount(orderSum);
+    }
+  }, [cartItems, dispatch]);
 
   const handleCloseModal = () => {
     setIsModalActive(false);
@@ -29,12 +41,14 @@ const Order = () => {
         <section className={styles.order__wrapper}>
           <div className={styles.order__wrapTitle}>
             <h2 className={styles.order__title}>Корзина</h2>
-            <span className={styles.order__count}>0</span>
+            <span className={styles.order__count}>{orderCount}</span>
           </div>
 
           <div className={styles.order__wrap_list} onClick={(e) => e.stopPropagation()}>
             <ul className={styles.order__list}>
-              <OrderItem />
+              {cartProducts.length
+                ? cartProducts.map((item) => <OrderItem key={item.id} {...item} />)
+                : null}
             </ul>
 
             <div className={styles.order__total}>
@@ -48,7 +62,7 @@ const Order = () => {
             <button
               className={styles.order__submit}
               onClick={handleDeliveryBtmClick}
-              disabled={!cartItems.length}
+              disabled={!!cartItems.length}
             >
               Оформить заказ
             </button>

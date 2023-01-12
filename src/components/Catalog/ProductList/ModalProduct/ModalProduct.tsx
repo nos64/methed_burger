@@ -1,5 +1,5 @@
 import ModalWrapper from '../../../ModalWrapper';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ModalProduct.module.scss';
 import { IProduct } from 'types/IProduct';
 import { API_URL } from 'common/constants';
@@ -28,9 +28,14 @@ const ModalProduct: React.FC<IModalProductProps> = ({
     setCount((count) => (count -= 1));
   };
 
-  const addToCartClick = (id: string, count = 1) => {
-    dispatch(addToCart({ id, count }));
+  const addToCartClick = (product: IProduct, count = 1) => {
+    dispatch(addToCart({ product, count }));
   };
+  useEffect(() => {
+    if (!isModalActive) {
+      setCount(1);
+    }
+  }, [isModalActive]);
 
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
@@ -67,7 +72,7 @@ const ModalProduct: React.FC<IModalProductProps> = ({
               <div className={styles.modalProduct__add}>
                 <button
                   className={styles.modalProduct__btn}
-                  onClick={() => addToCartClick(activeProduct.id, count)}
+                  onClick={() => addToCartClick(activeProduct, count)}
                 >
                   Добавить
                 </button>

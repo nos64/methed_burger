@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from './OrderItem.module.scss';
-import hotDog1 from '../../../../assets/images/hot-dog_1.jpg';
+import { IProduct } from 'types/IProduct';
+import { API_URL } from 'common/constants';
 
-const OrderItem = () => {
+const OrderItem = (props: IProduct) => {
   return (
     <li className={styles.order__item}>
-      <img className={styles.order__image} src={hotDog1} alt="Жгучий хот-дог" />
+      <img className={styles.order__image} src={`${API_URL}/${props.image}`} alt={props.title} />
 
       <div className={styles.order__product}>
-        <h3 className={styles.order__productTitle}>Жгучий хот-дог</h3>
-        <p className={styles.order__productWeight}>245г</p>
+        <h3 className={styles.order__productTitle}>{props.title}</h3>
+        <p className={styles.order__productWeight}>{props.weight}</p>
         <p className={styles.order__productPrice}>
-          239
+          {props.price}
           <span className={styles.currency}>₽</span>
         </p>
       </div>

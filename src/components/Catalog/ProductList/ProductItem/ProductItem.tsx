@@ -5,14 +5,14 @@ import { API_URL } from 'common/constants';
 import { useAppDispatch } from 'hooks/redux';
 import { addToCart } from 'store/reducers/cartSlice';
 interface IProductProps {
-  item: IProduct;
-  handleProductClick: (item: IProduct) => void;
+  product: IProduct;
+  handleProductClick: (product: IProduct) => void;
 }
 
-const ProductItem: React.FC<IProductProps> = ({ item, handleProductClick }) => {
+const ProductItem: React.FC<IProductProps> = ({ product, handleProductClick }) => {
   const dispatch = useAppDispatch();
-  const addToCartClick = (id: string, count = 1) => {
-    dispatch(addToCart({ id, count }));
+  const addToCartClick = (product: IProduct, count = 1) => {
+    dispatch(addToCart({ product, count }));
   };
 
   return (
@@ -20,25 +20,25 @@ const ProductItem: React.FC<IProductProps> = ({ item, handleProductClick }) => {
       <article className={styles.product}>
         <img
           className={styles.product__image}
-          src={`${API_URL}/${item.image}`}
-          alt={item.title}
-          onClick={() => handleProductClick(item)}
+          src={`${API_URL}/${product.image}`}
+          alt={product.title}
+          onClick={() => handleProductClick(product)}
         />
         <p className={styles.product__price}>
-          {item.price}
+          {product.price}
           <span className={styles.currency}> ₽</span>
         </p>
 
         <h3 className={styles.ptoduct__title}>
-          <button className={styles.product__detail} onClick={() => handleProductClick(item)}>
-            {item.title}
+          <button className={styles.product__detail} onClick={() => handleProductClick(product)}>
+            {product.title}
           </button>
         </h3>
-        <p className={styles.product__weight}>{item.weight}г</p>
+        <p className={styles.product__weight}>{product.weight}г</p>
         <button
           className={styles.product__add}
           type="button"
-          onClick={() => addToCartClick(item.id)}
+          onClick={() => addToCartClick(product)}
         >
           Добавить
         </button>

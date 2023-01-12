@@ -49,7 +49,7 @@ const ProductList: React.FC = () => {
               productsCat.map((item: IProduct) => (
                 <ProductItem
                   key={item.id}
-                  item={item}
+                  product={item}
                   handleProductClick={() => handleProductClick(item)}
                 />
               ))
