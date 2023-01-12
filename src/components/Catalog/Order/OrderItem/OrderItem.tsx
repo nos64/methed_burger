@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './OrderItem.module.scss';
 import { API_URL } from 'common/constants';
 import { ICartItem } from 'types/ICartItem';
@@ -37,7 +37,7 @@ const OrderItem = (props: ICartItem) => {
         <button className={styles.count__minus} onClick={() => decrement(props.product.id)}>
           -
         </button>
-        <p className={styles.count__amount}>{props.count.toString()}</p>
+        <p className={styles.count__amount}>{props.count}</p>
         <button className={styles.count__plus} onClick={() => increment(props.product.id)}>
           +
         </button>

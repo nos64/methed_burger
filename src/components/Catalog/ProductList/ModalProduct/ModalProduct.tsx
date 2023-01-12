@@ -30,6 +30,7 @@ const ModalProduct: React.FC<IModalProductProps> = ({
 
   const addToCartClick = (product: IProduct, count = 1) => {
     dispatch(addToCart({ product, count }));
+    setIsModalActive();
   };
   useEffect(() => {
     if (!isModalActive) {
