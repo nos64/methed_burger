@@ -10,19 +10,24 @@ const Order = () => {
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
   const [isModalActive, setIsModalActive] = useState(false);
   const cartItems = useAppSelector((store) => store.cart.cartItems);
-  console.log('cartItems: ', cartItems);
   const dispatch = useAppDispatch();
   const [orderCountSum, setOrderCountSum] = useState(0);
   const [orderMoneySum, setOrderMoneySum] = useState(0);
 
-  useEffect(() => {
-    // if (cartItems.length) {
+  const getTotalQuantity = () => {
     const orderSum = cartItems.reduce((acc, item) => acc + item.count, 0);
     setOrderCountSum(orderSum);
+  };
+
+  const getTotalSum = () => {
     const moneySum = cartItems.reduce((acc, item) => acc + item.product.price * item.count, 0);
     setOrderMoneySum(moneySum);
-    // }
-  }, [cartItems, dispatch]);
+  };
+
+  useEffect(() => {
+    getTotalQuantity();
+    getTotalSum();
+  }, [cartItems]);
 
   const handleCloseModal = () => {
     setIsModalActive(false);
@@ -64,13 +69,13 @@ const Order = () => {
             <button
               className={styles.order__submit}
               onClick={handleDeliveryBtmClick}
-              disabled={!!!cartItems.length}
+              disabled={!cartItems.length}
             >
               Оформить заказ
             </button>
             <div className={styles.order__wrapApeal}>
               <p className={styles.order__apeal}>Бесплатная доставка</p>
-              <button className={styles.order__close} onClick={handleOrderClick}>
+              <button className={styles.order__close} onClick={handleOrderClick} type="button">
                 Свернуть
               </button>
             </div>

@@ -1,6 +1,10 @@
 import ModalWrapper from '../../../ModalWrapper';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ModalDelivery.module.scss';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { IOrderDelivery, IOrderInCart } from 'types/IOrderDelivery';
+import { clearCart, sendOrderToServer } from 'store/reducers/cartSlice';
 
 interface IModalDeliveryProps {
   isModalActive: boolean;
@@ -8,28 +12,62 @@ interface IModalDeliveryProps {
 }
 
 const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModalActive }) => {
+  const dispatch = useAppDispatch();
   const [isDeliveryChecked, setIsDeliveryChecked] = useState(false);
+  const cartItems = useAppSelector((store) => store.cart.cartItems);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<IOrderDelivery>({ mode: 'onBlur' });
+
+  useEffect(() => {
+    const sendedOrder: IOrderInCart[] = [];
+    cartItems.map((item) => sendedOrder.push({ id: item.product.id, count: item.count }));
+    setValue('order', sendedOrder);
+  }, [setValue, cartItems]);
+
+  const onSubmit = (data: IOrderDelivery) => {
+    if (!isDeliveryChecked) {
+      delete data.address;
+      delete data.floor;
+      delete data.intercom;
+    }
+    dispatch(sendOrderToServer(data));
+    reset();
+    dispatch(clearCart());
+  };
 
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
       <div className={styles.modalDelivery}>
         <div className={styles.modalDelivery__container}>
           <h2 className={styles.modalDelivery__title}>Доставка</h2>
-          <form className={styles.modalDelivery__form} action="" id="delivery">
+          <form
+            className={styles.modalDelivery__form}
+            action=""
+            id="delivery"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <fieldset className={styles.modalDelivery__fieldset}>
               <input
                 className={styles.modalDelivery__input}
                 type="text"
-                name="name"
-                required
-                placeholder="Ваше имя"
+                {...register('name', {
+                  required: 'Пожалуйста введите ваше Имя',
+                })}
+                placeholder={errors?.name ? errors?.name?.message : 'Ваше имя'}
               />
               <input
                 className={styles.modalDelivery__input}
                 type="tel"
-                name="phone"
-                required
-                placeholder="Телефон"
+                {...register('phone', {
+                  required: 'Пожалуйста введите номер Телефона',
+                  pattern: /[0-9]/,
+                })}
+                placeholder={errors?.phone ? errors?.phone?.message : 'Телефон'}
               />
             </fieldset>
 
@@ -42,8 +80,8 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
                 <input
                   className={styles.modalDelivery__radio}
                   type="radio"
-                  name="format"
                   value="pickup"
+                  {...register('format')}
                   defaultChecked
                   onChange={() => setIsDeliveryChecked(false)}
                 />
@@ -53,8 +91,8 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
                 <input
                   className={styles.modalDelivery__radio}
                   type="radio"
-                  name="format"
                   value="delivery"
+                  {...register('format')}
                   checked={isDeliveryChecked}
                   onChange={() => setIsDeliveryChecked(true)}
                 />
@@ -73,24 +111,33 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
               <input
                 className={styles.modalDelivery__input}
                 type="address"
-                name="address"
+                {...register('address', {
+                  required: isDeliveryChecked,
+                })}
                 placeholder="Улица, дом, квартира"
               />
               <input
                 className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
                 type="number"
-                name="floor"
+                {...register('floor', {
+                  required: isDeliveryChecked,
+                })}
                 placeholder="Этаж"
               />
               <input
                 className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
                 type="number"
-                name="intercom"
+                {...register('intercom')}
                 placeholder="Домофон"
               />
             </fieldset>
           </form>
-          <button className={styles.modalDelivery__submit} form="delivery">
+          <button
+            className={styles.modalDelivery__submit}
+            form="delivery"
+            type="submit"
+            // disabled={!isValid}
+          >
             Оформить
           </button>
         </div>

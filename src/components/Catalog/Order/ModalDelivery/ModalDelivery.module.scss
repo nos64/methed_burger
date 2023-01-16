@@ -133,8 +133,12 @@ $gap: 8px;
   background-color: $hover-color;
 }
 
-.modalDelivery__submit:active {
+.modalDelivery__submit:active:enabled {
   transform: translate(1px, 1px);
+}
+
+.modalDelivery__submit:disabled {
+  cursor: no-drop;
 }
 
 .modalDelivery__submit:disabled {

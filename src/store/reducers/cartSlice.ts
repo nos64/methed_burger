@@ -1,24 +1,27 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getCartDataFromIDsList } from 'api/getData';
+import { sendOrder } from 'api/getData';
 import { AxiosError } from 'axios';
-import { IProduct } from 'types/IProduct';
+import { IOrderDelivery } from 'types/IOrderDelivery';
+// import { getCartDataFromIDsList } from 'api/getData';
+// import { AxiosError } from 'axios';
+// import { IProduct } from 'types/IProduct';
 import { ICartItem } from '../../types/ICartItem';
 
-// export const getCartData = createAsyncThunk<
-//   IProduct[],
-//   (string | undefined)[],
-//   { rejectValue: string }
-// >('cart/getCartDataFromIDsList', async (list: (string | undefined)[], { rejectWithValue }) => {
-//   try {
-//     const response = await getCartDataFromIDsList(list);
-//     return response;
-//   } catch (error) {
-//     if (error instanceof AxiosError) {
-//       return rejectWithValue('No products in cart');
-//     }
-//     throw error;
-//   }
-// });
+export const sendOrderToServer = createAsyncThunk(
+  'cart/sendOrder',
+  async (data: IOrderDelivery, { rejectWithValue }) => {
+    try {
+      const sendedOrder = await sendOrder(data);
+      console.log('sendedOrder: ', sendedOrder);
+      return sendedOrder;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue('No products in cart');
+      }
+      throw error;
+    }
+  }
+);
 
 interface ICartState {
   cartItems: ICartItem[];
@@ -59,15 +62,14 @@ const cartSlice = createSlice({
         if (item.count === 1) {
           // item.count = 1;
           // removeItem(action.payload);
-          const removeItem = state.cartItems.filter((item) => item.product.id !== action.payload);
-          state.cartItems = removeItem;
+          const removedItem = state.cartItems.filter((item) => item.product.id !== action.payload);
+          state.cartItems = removedItem;
         }
         item.count--;
       }
     },
-    removeItem(state, action: PayloadAction<string | undefined>) {
-      const removeItem = state.cartItems.filter((item) => item.product.id !== action.payload);
-      state.cartItems = removeItem;
+    clearCart(state) {
+      state.cartItems.length = 0;
     },
   },
   // extraReducers: (builder) => {
@@ -89,5 +91,5 @@ const cartSlice = createSlice({
   // },
 });
 
-export const { addToCart, incrementCount, decrementCount, removeItem } = cartSlice.actions;
+export const { addToCart, incrementCount, decrementCount, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
