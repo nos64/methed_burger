@@ -12,3 +12,12 @@ export type IOrderInCart = {
   id: string;
   count: number;
 };
+
+export interface IServerResponse {
+  createdAt: string;
+  format: string;
+  id: string;
+  name: string;
+  order: IOrderInCart[];
+  phone: string;
+}

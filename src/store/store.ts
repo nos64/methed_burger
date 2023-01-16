@@ -12,16 +12,18 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import orderSlice from './reducers/orderSlice';
 
 const rootReducer = combineReducers({
   product: productSlice,
   cart: cartSlice,
+  order: orderSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['product'],
+  blacklist: ['product', 'order'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

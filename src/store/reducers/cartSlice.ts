@@ -1,36 +1,38 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { sendOrder } from 'api/getData';
 import { AxiosError } from 'axios';
-import { IOrderDelivery } from 'types/IOrderDelivery';
+import { IOrderDelivery, IServerResponse } from 'types/IOrderDelivery';
 // import { getCartDataFromIDsList } from 'api/getData';
 // import { AxiosError } from 'axios';
 // import { IProduct } from 'types/IProduct';
 import { ICartItem } from '../../types/ICartItem';
 
-export const sendOrderToServer = createAsyncThunk(
-  'cart/sendOrder',
-  async (data: IOrderDelivery, { rejectWithValue }) => {
-    try {
-      const sendedOrder = await sendOrder(data);
-      console.log('sendedOrder: ', sendedOrder);
-      return sendedOrder;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue('No products in cart');
-      }
-      throw error;
-    }
-  }
-);
+// export const sendOrderToServer = createAsyncThunk(
+//   'cart/sendOrderToServer',
+//   async (data: IOrderDelivery, { rejectWithValue }) => {
+//     try {
+//       const sendedOrder = await sendOrder(data);
+//       // console.log('sendedOrder: ', sendedOrder);
+//       return sendedOrder;
+//     } catch (error) {
+//       if (error instanceof AxiosError) {
+//         return rejectWithValue('No products in cart');
+//       }
+//       throw error;
+//     }
+//   }
+// );
 
 interface ICartState {
   cartItems: ICartItem[];
-  // cartProducts: IProduct[];
+  // orderResponse: IServerResponse | null;
+  // isPending: boolean;
 }
 
 const initialState: ICartState = {
   cartItems: [],
-  // cartProducts: [],
+  // orderResponse: null,
+  // isPending: false,
 };
 
 const cartSlice = createSlice({
@@ -74,16 +76,18 @@ const cartSlice = createSlice({
   },
   // extraReducers: (builder) => {
   //   builder
-  //     .addCase(getCartData.pending, (state) => {
-  //       // state.isPending = true;
+  //     .addCase(sendOrderToServer.pending, (state) => {
+  //       state.isPending = true;
   //       // state.error = undefined;
   //     })
-  //     .addCase(getCartData.fulfilled, (state, action) => {
-  //       // state.isPending = false;
-  //       state.cartProducts = action.payload;
+  //     .addCase(sendOrderToServer.fulfilled, (state, action) => {
+  //       state.isPending = false;
+  //       // if (state.orderResponse) {
+  //       state.orderResponse = action.payload;
+  //       // }
   //     })
-  //     .addCase(getCartData.rejected, (state, action) => {
-  //       // state.isPending = false;
+  //     .addCase(sendOrderToServer.rejected, (state, action) => {
+  //       state.isPending = false;
   //       // state.error = action.payload;
   //       if (action.payload === 'Server Error!') {
   //       }

@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './ModalDelivery.module.scss';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { IOrderDelivery, IOrderInCart } from 'types/IOrderDelivery';
-import { clearCart, sendOrderToServer } from 'store/reducers/cartSlice';
+import { IOrderDelivery, IOrderInCart, IServerResponse } from 'types/IOrderDelivery';
+import { clearCart } from 'store/reducers/cartSlice';
+import { sendOrderToServer } from 'store/reducers/orderSlice';
 
 interface IModalDeliveryProps {
   isModalActive: boolean;
@@ -15,6 +16,8 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
   const dispatch = useAppDispatch();
   const [isDeliveryChecked, setIsDeliveryChecked] = useState(false);
   const cartItems = useAppSelector((store) => store.cart.cartItems);
+  const orderResponse = useAppSelector((store) => store.order.orderResponse);
+  const [serverResponse, setServerResponse] = useState<IServerResponse | null>(null);
   const {
     register,
     handleSubmit,
@@ -39,6 +42,13 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
     reset();
     dispatch(clearCart());
   };
+
+  useEffect(() => {
+    if (orderResponse) {
+      setServerResponse(orderResponse);
+      console.log('ServerResponse: ', serverResponse);
+    }
+  }, [orderResponse]);
 
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
