@@ -37,7 +37,6 @@ const orderSlice = createSlice({
   reducers: {
     clearOrderInformation(state) {
       state.orderResponse = null;
-      console.log('state.orderResponse: ', state.orderResponse);
     },
   },
   extraReducers: (builder) => {

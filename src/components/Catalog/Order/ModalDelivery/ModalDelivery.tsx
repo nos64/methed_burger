@@ -56,7 +56,6 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
   useEffect(() => {
     if (orderResponse) {
       setServerResponse(orderResponse);
-      console.log('ServerResponse: ', orderResponse);
       dispatch(clearOrderInformation());
       setInformationModalActive(true);
     }
@@ -155,12 +154,7 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
                 />
               </fieldset>
             </form>
-            <button
-              className={styles.modalDelivery__submit}
-              form="delivery"
-              type="submit"
-              // disabled={!isValid}
-            >
+            <button className={styles.modalDelivery__submit} form="delivery" type="submit">
               Оформить
             </button>
           </div>
@@ -170,7 +164,6 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
         isModalActive={informationModalActive}
         setIsModalActive={setInformationModalActive}
         serverResponse={serverResponse}
-        setServerResponse={setServerResponse}
       ></ModalDeliveryInfo>
     </>
   );
