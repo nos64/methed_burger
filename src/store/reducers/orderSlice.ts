@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { sendOrder } from 'api/sendOrder';
 import { AxiosError } from 'axios';
 import { IOrderDelivery, IServerResponse } from 'types/IOrderDelivery';
@@ -31,10 +31,15 @@ const initialState: ICartState = {
   error: undefined,
 };
 
-const cartSlice = createSlice({
+const orderSlice = createSlice({
   name: 'order',
   initialState,
-  reducers: {},
+  reducers: {
+    clearOrderInformation(state) {
+      state.orderResponse = null;
+      console.log('state.orderResponse: ', state.orderResponse);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sendOrderToServer.pending, (state) => {
@@ -54,4 +59,5 @@ const cartSlice = createSlice({
   },
 });
 
-export default cartSlice.reducer;
+export const { clearOrderInformation } = orderSlice.actions;
+export default orderSlice.reducer;

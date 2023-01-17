@@ -1,0 +1,75 @@
+@import '../../../../styles/colors';
+$gap: 8px;
+
+.modalDeliveryInfo {
+  background-color: $light-color;
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 10px;
+  display: flex;
+  z-index: 4;
+}
+
+.modalDeliveryInfo__container {
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalDeliveryInfo__title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+
+.modalDeliveryInfo__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+  margin-bottom: 18px;
+}
+
+
+@media (min-width: 480px) {
+  .modalDeliveryInfo {
+    max-width: 524px;
+    min-height: auto;
+    padding: 20px 16px 29px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .modalDeliveryInfo__container {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  $gap: 12px;
+
+  .modalDeliveryInfo {
+    max-width: 684px;
+    padding: 44px 24px 24px 366px;
+    background: url("../../../../assets/images/donats.svg") 19px center, linear-gradient(to right, $contrast-background 50%, $light-color 50%);
+    background-size: 302px, auto;
+    background-repeat: no-repeat;
+  }
+
+  .modalDeliveryInfo__title {
+    font-size: 24px;
+    line-height: 100%;
+    margin-bottom: 16px;
+  }
+
+  .modalDelivery__form {
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+}

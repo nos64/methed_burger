@@ -3,17 +3,18 @@ import { useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { clearCart } from 'store/reducers/cartSlice';
-import { sendOrderToServer } from 'store/reducers/orderSlice';
+import { clearOrderInformation, sendOrderToServer } from 'store/reducers/orderSlice';
 
 import ModalWrapper from '../../../ModalWrapper';
 
 import { IOrderDelivery, IOrderInCart, IServerResponse } from 'types/IOrderDelivery';
 
 import styles from './ModalDelivery.module.scss';
+import ModalDeliveryInfo from '../ModalDeliveryInfo';
 
 interface IModalDeliveryProps {
   isModalActive: boolean;
-  setIsModalActive: () => void;
+  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModalActive }) => {
@@ -23,6 +24,9 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
 
   const [isDeliveryChecked, setIsDeliveryChecked] = useState(false);
   const [serverResponse, setServerResponse] = useState<IServerResponse | null>(null);
+
+  const [informationModalActive, setInformationModalActive] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -46,118 +50,129 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
     dispatch(sendOrderToServer(data));
     reset();
     dispatch(clearCart());
+    setIsModalActive(false);
   };
 
   useEffect(() => {
     if (orderResponse) {
       setServerResponse(orderResponse);
       console.log('ServerResponse: ', orderResponse);
+      dispatch(clearOrderInformation());
+      setInformationModalActive(true);
     }
   }, [orderResponse]);
 
   return (
-    <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
-      <div className={styles.modalDelivery}>
-        <div className={styles.modalDelivery__container}>
-          <h2 className={styles.modalDelivery__title}>Доставка</h2>
-          <form
-            className={styles.modalDelivery__form}
-            action=""
-            id="delivery"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <fieldset className={styles.modalDelivery__fieldset}>
-              <input
-                className={styles.modalDelivery__input}
-                type="text"
-                {...register('name', {
-                  required: 'Пожалуйста введите ваше Имя',
-                })}
-                placeholder={errors?.name ? errors?.name?.message : 'Ваше имя'}
-              />
-              <input
-                className={styles.modalDelivery__input}
-                type="tel"
-                {...register('phone', {
-                  required: 'Пожалуйста введите номер Телефона',
-                  pattern: /[0-9]/,
-                })}
-                placeholder={errors?.phone ? errors?.phone?.message : 'Телефон'}
-              />
-            </fieldset>
-
-            <fieldset
-              className={
-                styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_radio
-              }
+    <>
+      <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
+        <div className={styles.modalDelivery}>
+          <div className={styles.modalDelivery__container}>
+            <h2 className={styles.modalDelivery__title}>Доставка</h2>
+            <form
+              className={styles.modalDelivery__form}
+              action=""
+              id="delivery"
+              onSubmit={handleSubmit(onSubmit)}
             >
-              <label className={styles.modalDelivery__label}>
+              <fieldset className={styles.modalDelivery__fieldset}>
                 <input
-                  className={styles.modalDelivery__radio}
-                  type="radio"
-                  value="pickup"
-                  {...register('format')}
-                  defaultChecked
-                  onChange={() => setIsDeliveryChecked(false)}
+                  className={styles.modalDelivery__input}
+                  type="text"
+                  {...register('name', {
+                    required: 'Пожалуйста введите ваше Имя',
+                  })}
+                  placeholder={errors?.name ? errors?.name?.message : 'Ваше имя'}
                 />
-                Самовывоз
-              </label>
-              <label className={styles.modalDelivery__label}>
                 <input
-                  className={styles.modalDelivery__radio}
-                  type="radio"
-                  value="delivery"
-                  {...register('format')}
-                  checked={isDeliveryChecked}
-                  onChange={() => setIsDeliveryChecked(true)}
+                  className={styles.modalDelivery__input}
+                  type="tel"
+                  {...register('phone', {
+                    required: 'Пожалуйста введите номер Телефона',
+                    pattern: /[0-9]/,
+                  })}
+                  placeholder={errors?.phone ? errors?.phone?.message : 'Телефон'}
                 />
-                Доставка
-              </label>
-            </fieldset>
+              </fieldset>
 
-            <fieldset
-              className={
-                !isDeliveryChecked
-                  ? styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_hide
-                  : styles.modalDelivery__fieldset
-              }
-              name="address-info"
+              <fieldset
+                className={
+                  styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_radio
+                }
+              >
+                <label className={styles.modalDelivery__label}>
+                  <input
+                    className={styles.modalDelivery__radio}
+                    type="radio"
+                    value="pickup"
+                    {...register('format')}
+                    defaultChecked
+                    onChange={() => setIsDeliveryChecked(false)}
+                  />
+                  Самовывоз
+                </label>
+                <label className={styles.modalDelivery__label}>
+                  <input
+                    className={styles.modalDelivery__radio}
+                    type="radio"
+                    value="delivery"
+                    {...register('format')}
+                    checked={isDeliveryChecked}
+                    onChange={() => setIsDeliveryChecked(true)}
+                  />
+                  Доставка
+                </label>
+              </fieldset>
+
+              <fieldset
+                className={
+                  !isDeliveryChecked
+                    ? styles.modalDelivery__fieldset + ' ' + styles.modalDelivery__fieldset_hide
+                    : styles.modalDelivery__fieldset
+                }
+                name="address-info"
+              >
+                <input
+                  className={styles.modalDelivery__input}
+                  type="address"
+                  {...register('address', {
+                    required: isDeliveryChecked,
+                  })}
+                  placeholder="Улица, дом, квартира"
+                />
+                <input
+                  className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
+                  type="number"
+                  {...register('floor', {
+                    required: isDeliveryChecked,
+                  })}
+                  placeholder="Этаж"
+                />
+                <input
+                  className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
+                  type="number"
+                  {...register('intercom')}
+                  placeholder="Домофон"
+                />
+              </fieldset>
+            </form>
+            <button
+              className={styles.modalDelivery__submit}
+              form="delivery"
+              type="submit"
+              // disabled={!isValid}
             >
-              <input
-                className={styles.modalDelivery__input}
-                type="address"
-                {...register('address', {
-                  required: isDeliveryChecked,
-                })}
-                placeholder="Улица, дом, квартира"
-              />
-              <input
-                className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
-                type="number"
-                {...register('floor', {
-                  required: isDeliveryChecked,
-                })}
-                placeholder="Этаж"
-              />
-              <input
-                className={styles.modalDelivery__input + ' ' + styles.modal_delivery__input_half}
-                type="number"
-                {...register('intercom')}
-                placeholder="Домофон"
-              />
-            </fieldset>
-          </form>
-          <button
-            className={styles.modalDelivery__submit}
-            form="delivery"
-            type="submit"
-            // disabled={!isValid}
-          >
-            Оформить
-          </button>
+              Оформить
+            </button>
+          </div>
         </div>
-      </div>
-    </ModalWrapper>
+      </ModalWrapper>
+      <ModalDeliveryInfo
+        isModalActive={informationModalActive}
+        setIsModalActive={setInformationModalActive}
+        serverResponse={serverResponse}
+        setServerResponse={setServerResponse}
+      ></ModalDeliveryInfo>
+    </>
   );
 };
 
