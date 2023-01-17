@@ -1,5 +1,7 @@
-import Container from '../Container';
 import React from 'react';
+
+import Container from '../Container';
+
 import styles from './Footer.module.scss';
 import SVGPics from '../../assets/images/_sprite.svg';
 

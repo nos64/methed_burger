@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from './OrderItem.module.scss';
+
 import { API_URL } from 'common/constants';
 import { ICartItem } from 'types/ICartItem';
 import { useAppDispatch } from 'hooks/redux';
 import { decrementCount, incrementCount } from 'store/reducers/cartSlice';
+
+import styles from './OrderItem.module.scss';
 
 const OrderItem = (props: ICartItem) => {
   const dispatch = useAppDispatch();

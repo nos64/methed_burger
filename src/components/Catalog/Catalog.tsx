@@ -1,8 +1,10 @@
-import Container from '../Container';
 import React from 'react';
-import styles from './Catalog.module.scss';
+
+import Container from '../Container';
 import Order from './Order';
 import ProductList from './ProductList';
+
+import styles from './Catalog.module.scss';
 
 const Catalog: React.FC = () => {
   return (

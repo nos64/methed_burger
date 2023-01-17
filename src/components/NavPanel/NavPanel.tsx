@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import styles from './NavPanel.module.scss';
-import { navPanelData } from '../../common/navPanelData';
-import NavItem from './NavItem';
-import { INavItem } from 'types/INavItem';
-import { setActiveCategory } from 'store/reducers/productSlice';
+
 import { useAppDispatch } from 'hooks/redux';
+import { setActiveCategory } from 'store/reducers/productSlice';
+
+import NavItem from './NavItem';
+
+import { navPanelData } from '../../common/navPanelData';
+import { INavItem } from 'types/INavItem';
+
+import styles from './NavPanel.module.scss';
 
 const NavPanel: React.FC = () => {
   const [activeCategoryArray, setActiveCategoryArray] = useState<INavItem[]>(navPanelData);

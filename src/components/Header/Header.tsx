@@ -1,7 +1,9 @@
-import Container from '../Container';
 import React from 'react';
-import styles from './Header.module.scss';
+
+import Container from '../Container';
+
 import SVGPics from '../../assets/images/_sprite.svg';
+import styles from './Header.module.scss';
 
 const Header = () => {
   return (

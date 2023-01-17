@@ -5,21 +5,6 @@ import { IProduct } from '../../types/IProduct';
 import { INavItem } from 'types/INavItem';
 import { navPanelData } from 'common/navPanelData';
 
-// export const getDataFromServer = createAsyncThunk<IProduct[], void, { rejectValue: string }>(
-//   'product/getDataFromServer',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const response = await getData();
-//       return response;
-//     } catch (error) {
-//       if (error instanceof AxiosError) {
-//         return rejectWithValue('Server Error!');
-//       }
-//       throw error;
-//     }
-//   }
-// );
-
 export const getProductCategory = createAsyncThunk<IProduct[], string, { rejectValue: string }>(
   'product/getProductCategory',
   async (category: string, { rejectWithValue }) => {
@@ -41,7 +26,6 @@ interface IProductState {
   activeCategory: INavItem;
   isPending: boolean;
   error: string | undefined;
-  // isNoData: boolean;
 }
 
 const initialState: IProductState = {
@@ -50,7 +34,6 @@ const initialState: IProductState = {
   activeCategory: navPanelData[0],
   isPending: false,
   error: undefined,
-  // isNoData: false,
 };
 
 const productSlice = createSlice({
@@ -62,21 +45,6 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(getDataFromServer.pending, (state) => {
-    //     state.isPending = true;
-    //     state.error = undefined;
-    //   })
-    //   .addCase(getDataFromServer.fulfilled, (state, action) => {
-    //     state.isPending = false;
-    //     state.products = action.payload;
-    //   })
-    //   .addCase(getDataFromServer.rejected, (state, action) => {
-    //     state.isPending = false;
-    //     state.error = action.payload;
-    //     if (action.payload === 'Server Error!') {
-    //     }
-    //   });
     builder
       .addCase(getProductCategory.pending, (state) => {
         state.isPending = true;
@@ -90,7 +58,6 @@ const productSlice = createSlice({
         state.isPending = false;
         state.error = action.payload;
         if (action.payload === 'Server Error!') {
-          // state.isNoData = true;
         }
       });
   },

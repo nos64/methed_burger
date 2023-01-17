@@ -1,9 +1,12 @@
 import React from 'react';
-import styles from './ProductItem.module.scss';
+
 import { IProduct } from '../../../../types/IProduct';
 import { API_URL } from 'common/constants';
 import { useAppDispatch } from 'hooks/redux';
 import { addToCart } from 'store/reducers/cartSlice';
+
+import styles from './ProductItem.module.scss';
+
 interface IProductProps {
   product: IProduct;
   handleProductClick: (product: IProduct) => void;

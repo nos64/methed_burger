@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
+
 import ModalProduct from './ModalProduct';
 import ProductItem from './ProductItem';
-import styles from './ProductList.module.scss';
+
 import { useAppSelector } from '../../../hooks/redux';
 import { useAppDispatch } from './../../../hooks/redux';
 import { getProductCategory } from 'store/reducers/productSlice';
 import { IProduct } from 'types/IProduct';
 
+import styles from './ProductList.module.scss';
+
 const ProductList: React.FC = () => {
+  const dispatch = useAppDispatch();
   const activeCategory = useAppSelector((store) => store.product.activeCategory);
   const productsCat = useAppSelector((store) => store.product.productsCat);
-  // const isNoData = useAppSelector((store) => store.product.isNoData);
   const isPending = useAppSelector((store) => store.product.isPending);
   const error = useAppSelector((store) => store.product.error);
-  const dispatch = useAppDispatch();
+
   const [isModalActive, setIsModalActive] = useState(false);
   const [activeProduct, setActiveProduct] = useState<IProduct | null>(null);
-  // const [visibleProductCategory, setVisibleProductCategory] = useState<IProduct[]>([]);
 
   useEffect(() => {
     dispatch(getProductCategory(activeCategory.modificator));
   }, [activeCategory, dispatch]);
-
-  // useEffect(() => {
-  //   const visibleProducts = products.filter((item) => item.category === activeCategory.modificator);
-  //   setVisibleProductCategory(visibleProducts);
-  // }, [activeCategory, products]);
 
   const handleProductClick = (item: IProduct | null) => {
     setIsModalActive(!isModalActive);

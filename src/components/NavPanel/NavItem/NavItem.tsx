@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { INavItem } from 'types/INavItem';
+
 import styles from './NavItem.module.scss';
 
 interface INavItemProps {

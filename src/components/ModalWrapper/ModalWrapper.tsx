@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import styles from './ModalWrapper.module.scss';
-import SVGPics from '../../assets/images/_sprite.svg';
+
 import { scrollController } from './../../utils/scrollController';
+import SVGPics from '../../assets/images/_sprite.svg';
+
+import styles from './ModalWrapper.module.scss';
 
 interface IModalWrapperProps {
   isModalActive: boolean;

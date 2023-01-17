@@ -1,18 +1,22 @@
-import { useAppSelector, useAppDispatch } from 'hooks/redux';
 import React, { useEffect, useState } from 'react';
-// import { getCartData } from 'store/reducers/cartSlice';
-import ModalDelivery from './ModalDelivery';
-import styles from './Order.module.scss';
+
+import { useAppSelector, useAppDispatch } from 'hooks/redux';
+
 import OrderItem from './OrderItem';
+import ModalDelivery from './ModalDelivery';
+
+import styles from './Order.module.scss';
 
 const Order = () => {
-  const [isOrderOpen, setIsOrderOpen] = useState(false);
-  const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
-  const [isModalActive, setIsModalActive] = useState(false);
-  const cartItems = useAppSelector((store) => store.cart.cartItems);
   const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((store) => store.cart.cartItems);
+
+  const [isOrderOpen, setIsOrderOpen] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
   const [orderCountSum, setOrderCountSum] = useState(0);
   const [orderMoneySum, setOrderMoneySum] = useState(0);
+
+  const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
 
   const getTotalQuantity = () => {
     const orderSum = cartItems.reduce((acc, item) => acc + item.count, 0);
@@ -35,6 +39,7 @@ const Order = () => {
   const handleDeliveryBtmClick = () => {
     setIsModalActive(true);
   };
+
   return (
     <>
       <div

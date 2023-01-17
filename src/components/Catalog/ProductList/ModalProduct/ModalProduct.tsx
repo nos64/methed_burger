@@ -1,10 +1,13 @@
-import ModalWrapper from '../../../ModalWrapper';
 import React, { useEffect, useState } from 'react';
-import styles from './ModalProduct.module.scss';
+
+import ModalWrapper from '../../../ModalWrapper';
+
 import { IProduct } from 'types/IProduct';
 import { API_URL } from 'common/constants';
 import { useAppDispatch } from 'hooks/redux';
 import { addToCart } from 'store/reducers/cartSlice';
+
+import styles from './ModalProduct.module.scss';
 
 interface IModalProductProps {
   isModalActive: boolean;
