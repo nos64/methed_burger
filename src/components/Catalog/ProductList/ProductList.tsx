@@ -39,22 +39,21 @@ const ProductList: React.FC = () => {
       <div className={styles.catalog__wrapper}>
         <h2 className={styles.catalog__title}>{activeCategory.buttonText}</h2>
 
-        <div className={styles.catalog__warpList}>
-          <ul className={styles.catalog__list}>
-            {isPending && <h2>...Loading</h2>}
-            {!error ? (
-              productsCat.map((item: IProduct) => (
+        {!error ? (
+          <div className={styles.catalog__warpList}>
+            <ul className={styles.catalog__list}>
+              {productsCat.map((item: IProduct) => (
                 <ProductItem
                   key={item.id}
                   product={item}
                   handleProductClick={() => handleProductClick(item)}
                 />
-              ))
-            ) : (
-              <h2>An error occered: {error}</h2>
-            )}
-          </ul>
-        </div>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <h2 className={styles.errorMessage}>An error occered: {error}</h2>
+        )}
       </div>
       <ModalProduct
         isModalActive={isModalActive}
