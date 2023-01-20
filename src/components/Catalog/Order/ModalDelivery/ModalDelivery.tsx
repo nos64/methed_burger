@@ -59,7 +59,7 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
       dispatch(clearOrderInformation());
       setInformationModalActive(true);
     }
-  }, [orderResponse]);
+  }, [orderResponse, dispatch]);
 
   return (
     <>

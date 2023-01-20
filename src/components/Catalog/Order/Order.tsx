@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector, useAppDispatch } from 'hooks/redux';
+import { useAppSelector } from 'hooks/redux';
 
 import OrderItem from './OrderItem';
 import ModalDelivery from './ModalDelivery';
@@ -8,7 +8,6 @@ import ModalDelivery from './ModalDelivery';
 import styles from './Order.module.scss';
 
 const Order = () => {
-  const dispatch = useAppDispatch();
   const cartItems = useAppSelector((store) => store.cart.cartItems);
 
   const [isOrderOpen, setIsOrderOpen] = useState(false);
@@ -18,19 +17,12 @@ const Order = () => {
 
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
 
-  const getTotalQuantity = () => {
+  useEffect(() => {
     const orderSum = cartItems.reduce((acc, item) => acc + item.count, 0);
     setOrderCountSum(orderSum);
-  };
 
-  const getTotalSum = () => {
     const moneySum = cartItems.reduce((acc, item) => acc + item.product.price * item.count, 0);
     setOrderMoneySum(moneySum);
-  };
-
-  useEffect(() => {
-    getTotalQuantity();
-    getTotalSum();
   }, [cartItems]);
 
   const handleCloseModal = () => {

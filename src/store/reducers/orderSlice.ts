@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { sendOrder } from 'api/sendOrder';
 import { AxiosError } from 'axios';
 import { IOrderDelivery, IServerResponse } from 'types/IOrderDelivery';

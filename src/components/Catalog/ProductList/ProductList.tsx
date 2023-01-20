@@ -14,7 +14,6 @@ const ProductList: React.FC = () => {
   const dispatch = useAppDispatch();
   const activeCategory = useAppSelector((store) => store.product.activeCategory);
   const productsCat = useAppSelector((store) => store.product.productsCat);
-  const isPending = useAppSelector((store) => store.product.isPending);
   const error = useAppSelector((store) => store.product.error);
 
   const [isModalActive, setIsModalActive] = useState(false);
