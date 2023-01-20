@@ -37,7 +37,7 @@ const ModalDelivery: React.FC<IModalDeliveryProps> = ({ isModalActive, setIsModa
 
   useEffect(() => {
     const sendedOrder: IOrderInCart[] = [];
-    cartItems.map((item) => sendedOrder.push({ id: item.product.id, count: item.count }));
+    cartItems.map((item) => sendedOrder.push({ id: item.id, count: item.count }));
     setValue('order', sendedOrder);
   }, [setValue, cartItems]);
 

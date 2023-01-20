@@ -1,6 +1,4 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import productSlice from './reducers/productSlice';
-import cartSlice from './reducers/cartSlice';
 import {
   persistStore,
   persistReducer,
@@ -12,18 +10,23 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+
+import productSlice from './reducers/productSlice';
+import cartSlice from './reducers/cartSlice';
 import orderSlice from './reducers/orderSlice';
+import renderedCartSlice from './reducers/renderedCartSlice';
 
 const rootReducer = combineReducers({
   product: productSlice,
   cart: cartSlice,
   order: orderSlice,
+  renderedCart: renderedCartSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['product', 'order'],
+  blacklist: ['product', 'order', 'renderedCart'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

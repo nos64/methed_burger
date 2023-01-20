@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 
 import OrderItem from './OrderItem';
 import ModalDelivery from './ModalDelivery';
 
+import { getProductsByIDList } from 'store/reducers/renderedCartSlice';
+
 import styles from './Order.module.scss';
 
 const Order = () => {
+  const renderedProducts = useAppSelector((store) => store.renderedCart.renderedProducts);
   const cartItems = useAppSelector((store) => store.cart.cartItems);
+  const dispatch = useAppDispatch();
 
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
@@ -18,12 +22,18 @@ const Order = () => {
   const handleOrderClick = () => setIsOrderOpen(!isOrderOpen);
 
   useEffect(() => {
+    dispatch(getProductsByIDList());
     const orderSum = cartItems.reduce((acc, item) => acc + item.count, 0);
     setOrderCountSum(orderSum);
+  }, [cartItems, dispatch]);
 
-    const moneySum = cartItems.reduce((acc, item) => acc + item.product.price * item.count, 0);
+  useEffect(() => {
+    const moneySum = renderedProducts.reduce(
+      (acc, item) => acc + item.product.price * item.count,
+      0
+    );
     setOrderMoneySum(moneySum);
-  }, [cartItems]);
+  }, [cartItems, renderedProducts]);
 
   const handleCloseModal = () => {
     setIsModalActive(false);
@@ -50,8 +60,8 @@ const Order = () => {
 
           <div className={styles.order__wrap_list} onClick={(e) => e.stopPropagation()}>
             <ul className={styles.order__list}>
-              {cartItems.length
-                ? cartItems.map((item) => <OrderItem key={item.product.id} {...item} />)
+              {renderedProducts.length
+                ? renderedProducts.map((item) => <OrderItem key={item.product.id} {...item} />)
                 : null}
             </ul>
 
