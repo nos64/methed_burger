@@ -31,8 +31,8 @@ const ModalProduct: React.FC<IModalProductProps> = ({
     setCount((count) => (count -= 1));
   };
 
-  const addToCartClick = (product: IProduct, count = 1) => {
-    dispatch(addToCart({ product, count }));
+  const addToCartClick = (id: string, count = 1) => {
+    dispatch(addToCart({ id, count }));
     setIsModalActive();
   };
   useEffect(() => {
@@ -76,7 +76,7 @@ const ModalProduct: React.FC<IModalProductProps> = ({
               <div className={styles.modalProduct__add}>
                 <button
                   className={styles.modalProduct__btn}
-                  onClick={() => addToCartClick(activeProduct, count)}
+                  onClick={() => addToCartClick(activeProduct.id, count)}
                 >
                   Добавить
                 </button>

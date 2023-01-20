@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { API_URL } from 'common/constants';
-import { ICartItem } from 'types/ICartItem';
+import { IRenderedProducts } from 'types/IRenderedProducts';
 import { useAppDispatch } from 'hooks/redux';
 import { decrementCount, incrementCount } from 'store/reducers/cartSlice';
 
 import styles from './OrderItem.module.scss';
 
-const OrderItem = (props: ICartItem) => {
+const OrderItem = (props: IRenderedProducts) => {
   const dispatch = useAppDispatch();
 
   const increment = (id: string) => {

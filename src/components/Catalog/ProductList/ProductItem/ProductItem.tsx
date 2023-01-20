@@ -14,8 +14,9 @@ interface IProductProps {
 
 const ProductItem: React.FC<IProductProps> = ({ product, handleProductClick }) => {
   const dispatch = useAppDispatch();
-  const addToCartClick = (product: IProduct, count = 1) => {
-    dispatch(addToCart({ product, count }));
+
+  const addToCartClick = (id: string, count = 1) => {
+    dispatch(addToCart({ id, count }));
   };
 
   return (
@@ -41,7 +42,7 @@ const ProductItem: React.FC<IProductProps> = ({ product, handleProductClick }) =
         <button
           className={styles.product__add}
           type="button"
-          onClick={() => addToCartClick(product)}
+          onClick={() => addToCartClick(product.id)}
         >
           Добавить
         </button>
