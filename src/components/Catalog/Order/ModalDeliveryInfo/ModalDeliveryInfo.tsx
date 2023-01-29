@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IServerResponse } from 'types/IOrderDelivery';
 
 import ModalWrapper from '../../../ModalWrapper';
@@ -16,6 +16,16 @@ const ModalDeliveryInfo: React.FC<IModalDeliveryInfoProps> = ({
   setIsModalActive,
   serverResponse,
 }) => {
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    if (serverResponse) {
+      const realTime =
+        Date.parse(serverResponse.createdAt) -
+        new Date(serverResponse.createdAt).getTimezoneOffset() * 60 * 1000;
+      setTime(new Date(realTime).toISOString());
+    }
+  }, [serverResponse, time]);
+
   return (
     <ModalWrapper isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
       {serverResponse && (
@@ -26,12 +36,10 @@ const ModalDeliveryInfo: React.FC<IModalDeliveryInfoProps> = ({
               <p className={styles.modalDeliveryInfo__text}>Заказ № {serverResponse.id}</p>
               <div className={styles.modalDeliveryInfo__date}>
                 <span>
-                  От {serverResponse.createdAt.slice(8, 10)}.{serverResponse.createdAt.slice(5, 7)}.
-                  {serverResponse.createdAt.slice(0, 4)}
+                  От {time.slice(8, 10)}.{time.slice(5, 7)}.{time.slice(0, 4)}
                 </span>
                 <span>
-                  в {serverResponse.createdAt.slice(11, 13)}:
-                  {serverResponse.createdAt.slice(14, 16)}
+                  в {time.slice(11, 13)}:{time.slice(14, 16)}
                 </span>
               </div>
 

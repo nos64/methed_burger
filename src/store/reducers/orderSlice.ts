@@ -10,6 +10,7 @@ export const sendOrderToServer = createAsyncThunk<
 >('cart/sendOrderToServer', async (data: IOrderDelivery, { rejectWithValue }) => {
   try {
     const sendedOrder = await sendOrder(data);
+
     return sendedOrder;
   } catch (error) {
     if (error instanceof AxiosError) {
